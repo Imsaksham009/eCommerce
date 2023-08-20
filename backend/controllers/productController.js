@@ -1,77 +1,53 @@
 const Product = require("../Models/productModel");
+const catchAsync = require("../utils/catchAsync");
 const AppError = require("../utils/error");
 
 // Get All Products
-exports.getProducts = async (req, res, next) => {
-    try {
-        const products = await Product.find();
-        res.status(200).json({ success: true, products });
-    } catch (e) {
-        return next(new AppError("Internal Error", 500));
-    }
-    next();
-};
+exports.getProducts = catchAsync(async (req, res, next) => {
+    const products = await Product.find();
+    res.status(200).json({ success: true, products });
+});
 
 // Get Product details
-exports.getDetails = async (req, res, next) => {
-    try {
-        const product = await Product.findById(req.params.id);
-        if (!product) return next(new AppError("Product not Found", 500));
-        res.status(200).json({ success: true, product });
-    } catch (e) {
-        return next(new AppError("Internal Error", 500));
-    }
-    next();
-};
+exports.getDetails = catchAsync(async (req, res, next) => {
+    const product = await Product.findById(req.params.id);
+    if (!product) return next(new AppError("Product not Found", 500));
+    res.status(200).json({ success: true, product });
+});
 
 //Add Product Route ---- Admin
-exports.addProduct = async (req, res, next) => {
-    try {
-        const product = new Product(req.body);
-        await product.save();
-        res.json(200, { success: true, product });
-    } catch (e) {
-        return next(new AppError("Internal Error", 500));
-    }
-    next();
-};
+exports.addProduct = catchAsync(async (req, res, next) => {
+    const product = new Product(req.body);
+    await product.save();
+    res.status(200).json({ success: true, product });
+});
 
 // Edit Product ---- Admin
-exports.updateProduct = async (req, res, next) => {
-    try {
-        let foundProduct = await Product.findById(req.params.id);
+exports.updateProduct = catchAsync(async (req, res, next) => {
+    let foundProduct = await Product.findById(req.params.id);
 
-        if (!foundProduct) {
-            return next(new AppError("Product not found", 500));
-        }
-
-        foundProduct = await Product.findByIdAndUpdate(req.params.id, req.body, {
-            new: true, runValidators: true
-        });
-
-        res.status(200).json({ success: true, foundProduct });
-    } catch (e) {
-        return next(new AppError("Internal Error", 500));
+    if (!foundProduct) {
+        return next(new AppError("Product not found", 500));
     }
-    next();
 
-};
+    foundProduct = await Product.findByIdAndUpdate(req.params.id, req.body, {
+        new: true, runValidators: true
+    });
+
+    res.status(200).json({ success: true, foundProduct });
+
+});
 
 // Delete Product ---- Admin
-exports.deleteProduct = async (req, res, next) => {
-    try {
-        let foundProduct = await Product.findById(req.params.id);
+exports.deleteProduct = catchAsync(async (req, res, next) => {
 
-        if (!foundProduct) {
-            return res.staus(500).json({ success: false, message: `Product not found` });
-        }
+    let foundProduct = await Product.findById(req.params.id);
 
-        await Product.findByIdAndDelete(req.params.id);
-
-        res.status(200).json({ success: true, foundProduct });
-    } catch (e) {
-        return next(new AppError("Internal Error", 500));
+    if (!foundProduct) {
+        return next(new AppError("Product not found", 500));
     }
-    next();
 
-};
+    await Product.findByIdAndDelete(req.params.id);
+
+    res.status(200).json({ success: true, foundProduct });
+});
