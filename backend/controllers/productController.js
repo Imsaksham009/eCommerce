@@ -1,11 +1,16 @@
 const Product = require("../Models/productModel");
+const ApiFeatures = require("../utils/apiFeatures");
 const catchAsync = require("../utils/catchAsync");
 const AppError = require("../utils/error");
 
 // Get All Products
 exports.getProducts = catchAsync(async (req, res, next) => {
-    const products = await Product.find();
-    res.status(200).json({ success: true, products });
+    const resultPerPage = 5;
+    const totalCount = await Product.countDocuments();
+    const apifeature = new ApiFeatures(Product, req.query);
+    let query = apifeature.search().filter().pagination(resultPerPage);
+    const products = await query.query;
+    res.status(200).json({ success: true, totalCount, products });
 });
 
 // Get Product details
