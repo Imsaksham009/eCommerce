@@ -1,11 +1,13 @@
 const express = require("express");
-
 const app = express();
 
-app.use(express.json());
+const cookieParser = require("cookie-parser");
 
+app.use(express.json());
+app.use(cookieParser());
 
 app.use('/api/v1', require("./routes/productRoute"));
+app.use('/api/v1/user', require("./routes/userRoute.js"));
 
 
 //error handler
