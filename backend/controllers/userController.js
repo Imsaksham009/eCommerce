@@ -14,13 +14,14 @@ exports.registerUser = catchAsync(async (req, res, next) => {
         }
     });
     const token = user.getJsonWebToken();
-    req.user = user;
+    const { password: pswd, ...userRest } = user._doc;
+    req.user = userRest;
     res.status(200).cookie("token", token, { maxAge: (5 * 24 * 60 * 60 * 1000), httpOnly: true }).json({ success: true });
 });
 
 exports.loginUser = catchAsync(async (req, res, next) => {
     const { email, password } = req.body;
-    if (!email || !password) return next(new AppError("Enter credentials correctly"), 500);
+    if (!password) return next(new AppError("Enter credentials correctly"), 500);
 
     const user = await User.findOne({ email }).select("+password");
     if (!user) return next(new AppError("email or password is wrong", 500));
@@ -30,7 +31,9 @@ exports.loginUser = catchAsync(async (req, res, next) => {
     if (!passwordVerify) return next(new AppError("email or password is wrong!!!", 500));
 
     const token = user.getJsonWebToken();
-    req.user = user;
+
+    const { password: pswd, ...userRest } = user._doc;
+    req.user = userRest;
 
     res.status(200).cookie("token", token, { maxAge: (5 * 24 * 60 * 60 * 1000), httpOnly: true }).json({ success: true });
 

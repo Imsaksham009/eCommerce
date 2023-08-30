@@ -8,8 +8,8 @@ exports.getProducts = catchAsync(async (req, res, next) => {
     const resultPerPage = 5;
     const totalCount = await Product.countDocuments();
     const apifeature = new ApiFeatures(Product, req.query);
-    let query = apifeature.search().filter().pagination(resultPerPage);
-    const products = await query.query;
+    let result = apifeature.search().filter().pagination(resultPerPage);
+    const products = await result.query;
     res.status(200).json({ success: true, totalCount, products });
 });
 
@@ -23,6 +23,7 @@ exports.getDetails = catchAsync(async (req, res, next) => {
 //Add Product Route ---- Admin
 exports.addProduct = catchAsync(async (req, res, next) => {
     const product = new Product(req.body);
+    product.user = req.user.id;
     await product.save();
     res.status(200).json({ success: true, product });
 });
