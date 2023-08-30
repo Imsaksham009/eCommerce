@@ -126,6 +126,7 @@ exports.getUserDetail = catchAsync(async (req, res, next) => {
     res.status(200).json({ success: true, user });
 });
 
+//Change Password
 exports.changepassword = catchAsync(async (req, res, next) => {
     const user = await User.findById(req.user.id).select("+password");
 
@@ -141,4 +142,53 @@ exports.changepassword = catchAsync(async (req, res, next) => {
 
     res.status(200).json({ success: true, message: "Password changed successfully" });
 
+});
+
+//update Profile
+exports.updateProfile = catchAsync(async (req, res, next) => {
+    const { name, email } = req.body;
+    const newBody = {
+        name,
+        email,
+    };
+
+    const user = await User.findByIdAndUpdate(req.user.id, newBody, {
+        new: true,
+        runValidators: true,
+    });
+
+    res.status(200).json({ success: true, message: "User updated" });
+});
+
+//Get Single User Detail
+exports.getsingleuserdetail = catchAsync(async (req, res, next) => {
+    const user = await User.findById(req.params.id);
+
+    if (!user) return next(new AppError("User Not Found", 404));
+
+    res.status(200).json({ success: true, user });
+});
+
+//change Role
+exports.updateUserRole = catchAsync(async (req, res, next) => {
+    const { role } = req.body;
+    const user = await User.findByIdAndUpdate(req.params.id, { role }, {
+        new: true,
+        runValidators: true
+    });
+    if (!user) return next(new AppError("User Not found", 404));
+    res.status(200).json({ success: true, message: "User role updated", user });
+});
+
+//Delete User
+exports.deleteUser = catchAsync(async (req, res, next) => {
+    const user = await User.findById(req.params.id);
+
+    if (!user) return next(new AppError("User Not found", 404));
+
+    if (user.role === "admin") return next(new AppError("Admin can't be deleted", 401));
+
+    await User.findByIdAndDelete(req.params.id);
+
+    res.status(200).json({ success: true, message: "User Deleted" });
 });
