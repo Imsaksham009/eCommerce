@@ -6,6 +6,8 @@ const jwt = require("jsonwebtoken");
 const sendEmail = require("../utils/sendEmail");
 const crypto = require("crypto");
 
+
+//Register new user
 exports.registerUser = catchAsync(async (req, res, next) => {
     const { name, email, password } = req.body;
     const user = await User.create({
@@ -16,11 +18,12 @@ exports.registerUser = catchAsync(async (req, res, next) => {
         }
     });
     const token = user.getJsonWebToken();
-    const { password: pswd, ...userRest } = user._doc;
-    req.user = userRest;
+
     res.status(200).cookie("token", token, { maxAge: (5 * 24 * 60 * 60 * 1000), httpOnly: true }).json({ success: true });
 });
 
+
+//Login with existing user
 exports.loginUser = catchAsync(async (req, res, next) => {
     const { email, password } = req.body;
     if (!password) return next(new AppError("Enter credentials correctly"), 500);
@@ -34,25 +37,27 @@ exports.loginUser = catchAsync(async (req, res, next) => {
 
     const token = user.getJsonWebToken();
 
-    const { password: pswd, ...userRest } = user._doc;
-    req.user = userRest;
-
     res.status(200).cookie("token", token, { maxAge: (5 * 24 * 60 * 60 * 1000), httpOnly: true }).json({ success: true });
 
 
 });
 
+
+//Logout user
 exports.logOut = catchAsync(async (req, res, next) => {
     res.cookie("token", null, { maxAge: 0, httpOnly: true });
     req.user = null;
     res.status(200).json({ success: true, message: "Logged Out" });
 });
 
+//Get all user ---- Temp fun
 exports.getAllUsers = catchAsync(async (req, res, next) => {
     const users = await User.find({}).select("-password");
     res.json(users);
 });
 
+
+// Forgot Password email link send
 exports.forgotPassword = catchAsync(async (req, res, next) => {
     const { email } = req.body;
     const user = await User.findOne({ email });
@@ -85,6 +90,8 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
 
 });
 
+
+//Reset Password using link
 exports.resetPassword = catchAsync(async (req, res, next) => {
     const { resetToken } = req.params;
 
@@ -110,4 +117,28 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
     res.status(200).json({ success: true, message: "Password is changed" });
 
     next();
+});
+
+
+//Get User Details
+exports.getUserDetail = catchAsync(async (req, res, next) => {
+    const user = await User.findById(req.user.id);
+    res.status(200).json({ success: true, user });
+});
+
+exports.changepassword = catchAsync(async (req, res, next) => {
+    const user = await User.findById(req.user.id).select("+password");
+
+    const { oldpassword } = req.body;
+    const passwordVerify = await bcrypt.compare(oldpassword, user.password);
+
+    if (!passwordVerify) return next(new AppError("Entered Password is wrong. Please enter correct password", 400));
+
+    if (req.body.password !== req.body.confirmPassword) return next(new AppError("Password doesn't match", 400));
+
+    user.password = req.body.password;
+    await user.save({ validateBeforeSave: false });
+
+    res.status(200).json({ success: true, message: "Password changed successfully" });
+
 });
