@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Review = require("./reviewModel");
 
 const productSchema = new mongoose.Schema({
     name: {
@@ -39,25 +40,14 @@ const productSchema = new mongoose.Schema({
         type: Number,
         required: [true, "Please enter the stock of product"]
     },
+    numOfReviews: {
+        type: Number,
+        default: 0
+    },
     reviews: [
         {
-            user: {
-                type: mongoose.Schema.ObjectId,
-                ref: "User",
-                required: true
-            },
-            name: {
-                type: String,
-                required: true
-            },
-            rating: {
-                type: Number,
-                required: true
-            },
-            comment: {
-                type: String,
-                required: true
-            }
+            type: mongoose.Schema.ObjectId,
+            ref: "Review"
         }
     ],
     user: {
@@ -68,6 +58,18 @@ const productSchema = new mongoose.Schema({
     createdAt: {
         type: Date,
         default: Date.now
+    }
+});
+
+productSchema.post("findOneAndDelete", async (d) => {
+    if (d) {
+        await Review.deleteMany({
+            _id: {
+                $in: d.reviews,
+            },
+        }).catch((e) => {
+            console.log(e);
+        });
     }
 });
 

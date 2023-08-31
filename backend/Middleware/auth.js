@@ -3,6 +3,7 @@ const AppError = require("../utils/error");
 const jwt = require("jsonwebtoken");
 const User = require("../Models/userModel");
 const Product = require("../Models/productModel");
+const Review = require("../Models/reviewModel");
 
 exports.isAuthenticated = catchAsync(async (req, res, next) => {
     const { token } = req.cookies;
@@ -15,7 +16,7 @@ exports.isAuthenticated = catchAsync(async (req, res, next) => {
     next();
 });
 
-exports.isAuthor = catchAsync(async (req, res, next) => {
+exports.isProductAuthor = catchAsync(async (req, res, next) => {
     const { token } = req.cookies;
 
     if (!token) return next(new AppError("Login to access the resource"), 401);
@@ -28,6 +29,16 @@ exports.isAuthor = catchAsync(async (req, res, next) => {
     if (!product) return next(new AppError("Product Not Found", 404));
 
     if (product.user != req.user.id) return next(new AppError("Not Allowed", 403));
+
+    next();
+});
+
+exports.isReviewAuthor = catchAsync(async (req, res, next) => {
+    const review = await Review.findById(req.params.reviewid);
+    if (!review) return next(new AppError("Review not found", 404));
+
+    if (review.user.toString() !== req.user._id.toString())
+        return next(new AppError("Not authorized to delete other user review", 403));
 
     next();
 });

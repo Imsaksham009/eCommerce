@@ -1,4 +1,5 @@
 const Product = require("../Models/productModel");
+const Review = require("../Models/reviewModel");
 const ApiFeatures = require("../utils/apiFeatures");
 const catchAsync = require("../utils/catchAsync");
 const AppError = require("../utils/error");
@@ -15,7 +16,7 @@ exports.getProducts = catchAsync(async (req, res, next) => {
 
 // Get Product details
 exports.getDetails = catchAsync(async (req, res, next) => {
-    const product = await Product.findById(req.params.id);
+    const product = await Product.findById(req.params.id).populate("reviews");
     if (!product) return next(new AppError("Product not Found", 500));
     res.status(200).json({ success: true, product });
 });
@@ -50,10 +51,12 @@ exports.deleteProduct = catchAsync(async (req, res, next) => {
     let foundProduct = await Product.findById(req.params.id);
 
     if (!foundProduct) {
-        return next(new AppError("Product not found", 500));
+        return next(new AppError("Product not found", 404));
     }
 
     await Product.findByIdAndDelete(req.params.id);
 
     res.status(200).json({ success: true, foundProduct });
 });
+
+

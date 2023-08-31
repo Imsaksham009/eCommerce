@@ -7,6 +7,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use('/api/v1', require("./routes/productRoute"));
+app.use('/api/v1/product/:id/review', require("./routes/reviewRoute"));
 app.use('/api/v1/user', require("./routes/userRoute.js"));
 
 
