@@ -1,14 +1,16 @@
 const express = require("express");
 const app = express();
-
+const cors = require("cors");
 const cookieParser = require("cookie-parser");
 
+app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 
 app.use('/api/v1', require("./routes/productRoute"));
 app.use('/api/v1/product/:id/review', require("./routes/reviewRoute"));
 app.use('/api/v1/user', require("./routes/userRoute.js"));
+app.use('/api/v1/order', require("./routes/orderRoute"));
 
 
 //error handler

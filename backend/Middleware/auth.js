@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const User = require("../Models/userModel");
 const Product = require("../Models/productModel");
 const Review = require("../Models/reviewModel");
+const Order = require("../Models/orderModel");
 
 exports.isAuthenticated = catchAsync(async (req, res, next) => {
     const { token } = req.cookies;
@@ -41,6 +42,17 @@ exports.isReviewAuthor = catchAsync(async (req, res, next) => {
         return next(new AppError("Not authorized to delete other user review", 403));
 
     next();
+});
+
+exports.isOrderAuthor = catchAsync(async (req, res, next) => {
+    const order = await Order.findById(req.params.id);
+    if (!order) return next(new AppError("Order not Found", 404));
+
+    if (req.user.role === "admin" || order.user.toString() === req.user._id.toString()) return next();
+
+    return next(new AppError("Not authorised to see others order", 403));
+
+
 });
 
 

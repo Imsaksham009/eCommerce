@@ -31,13 +31,13 @@ router.put("/updateuserprofile", isAuthenticated, updateProfile);
 router.get("/logout", logOut);
 
 // Get User Details
-router.get("/admin/user/:id", isAuthenticated, isAdmin, getsingleuserdetail);
+router.get("/admin/:id", isAuthenticated, isAdmin, getsingleuserdetail);
 
 //Get all Users - admin
 router.get("/admin/allusers", isAuthenticated, isAdmin, getAllUsers);
 
 //change user role -- admin
-router.put("/admin/user/changerole/:id", isAuthenticated, isAdmin, updateUserRole);
+router.put("/admin/changerole/:id", isAuthenticated, isAdmin, updateUserRole);
 
 //Delete a user
 router.delete("/admin/delete/:id", isAuthenticated, isAdmin, deleteUser);
