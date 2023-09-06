@@ -77,7 +77,7 @@ const Home = () => {
 	return (
 		<>
 			<div className="banner">
-				<p>Welcome to Ecommerce</p>
+				<h2>Welcome to eCommerce</h2>
 				<h1>FIND AMAZING PRODUCTS BELOW</h1>
 
 				<a href="#container">

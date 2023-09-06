@@ -10,16 +10,20 @@
 	align-items: center;
 	justify-content: center;
 	color: white;
+	filter: drop-shadow(5px 5px 10px rgb(40, 33, 33));
 }
 
 .banner > h1 {
 	margin: 5vmax;
 
-	font: 600 2.5vmax "Roboto";
+	font: 800 2.5vmax "Roboto";
 }
 
-.banner > p {
-	font: 300 1.4vmax "Lucida Sans";
+.banner > h2 {
+	font: 100 2.1vmax "Lucida Sans";
+	/* filter: drop-shadow(100px 100px 200px white);
+     */
+	text-shadow: 1vmax 1vmax rgba(223, 218, 218, 0.142);
 }
 
 .banner > a > button {
@@ -37,7 +41,6 @@
 	background-color: rgba(255, 255, 255, 0);
 	color: white;
 }
-
 .banner::after {
 	content: "";
 	width: 100vw;

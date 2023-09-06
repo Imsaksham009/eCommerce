@@ -101,7 +101,6 @@ function ResponsiveAppBar() {
 						as={Link}
 						variant="h6"
 						noWrap
-						component="a"
 						to="/"
 						sx={{
 							mr: 2,
