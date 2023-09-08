@@ -1,15 +1,19 @@
 /* eslint-disable  no-unused-vars */
 import React, { useEffect } from "react";
 import MouseIcon from "@mui/icons-material/Mouse";
-import ProductCard from "./ProductCard";
+import ProductCard from "./Products/ProductCard";
 import "./home.css";
 import { Container, Grid } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { getProducts } from "../../reducers/Products/productAction";
+import {
+	getProducts,
+	clearErrors,
+} from "../../reducers/Products/productAction";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Loader from "../Loader/Loader";
+import { clearAllErrors } from "../../reducers/Products/productReducer";
 
-import loader from "../Layout/Loader/loader.gif";
 const Home = () => {
 	const dispatch = useDispatch();
 
@@ -18,12 +22,15 @@ const Home = () => {
 	);
 
 	useEffect(() => {
-		if (error) {
-			toast.error(`Error: ${error}`);
-			return;
-		}
 		getProducts(dispatch);
-	}, [dispatch, error]);
+	}, [dispatch]);
+
+	useEffect(() => {
+		if (error) {
+			toast.error(error);
+			clearErrors(dispatch);
+		}
+	}, [error, dispatch]);
 
 	return (
 		<>
@@ -51,17 +58,7 @@ const Home = () => {
 			<div id="container">
 				<h2 className="homeHeading">Featured Products</h2>
 				{loading ? (
-					<>
-						<img
-							src={loader}
-							alt="loading"
-							style={{
-								margin: "0% 46%",
-								width: "130px",
-								height: "130px",
-							}}
-						/>
-					</>
+					<Loader />
 				) : (
 					<Container fixed>
 						<Grid container spacing={1}>

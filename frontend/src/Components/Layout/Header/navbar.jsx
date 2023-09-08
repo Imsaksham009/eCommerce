@@ -183,6 +183,7 @@ function ResponsiveAppBar() {
 					</Box>
 					<ShoppingCartIcon
 						sx={{
+							textDecoration: "none",
 							display: { xs: "flex", md: "none" },
 							position: "absolute",
 							ml: "7vmax",
