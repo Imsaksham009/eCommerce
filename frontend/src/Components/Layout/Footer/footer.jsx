@@ -15,7 +15,7 @@ const Footer = () => {
 			</div>
 
 			<div className="midFooter">
-				<img width="500px" src={logo} alt="" />
+				<img src={logo} alt="" />
 				<p>High Quality is our first priority</p>
 
 				<p>Copyrights 2023 &copy; Saksham Gupta</p>

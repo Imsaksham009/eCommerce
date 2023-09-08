@@ -2,27 +2,28 @@
 	background-image: url("../../images/cover.jfif");
 	background-position: center;
 	background-repeat: no-repeat;
+	border-radius: 0% 0% 10% 10%;
+	border: none;
 	background-size: cover;
-	height: 100vmin;
+	height: 85vmin;
 	display: flex;
 	flex-direction: column;
 	text-align: center;
 	align-items: center;
 	justify-content: center;
 	color: white;
-	filter: drop-shadow(5px 5px 10px rgb(40, 33, 33));
+
+	filter: drop-shadow(30px 30px 40px rgba(255, 7, 7, 0.326));
 }
 
 .banner > h1 {
 	margin: 5vmax;
-
 	font: 800 2.5vmax "Roboto";
 }
 
 .banner > h2 {
 	font: 100 2.1vmax "Lucida Sans";
-	/* filter: drop-shadow(100px 100px 200px white);
-     */
+
 	text-shadow: 1vmax 1vmax rgba(223, 218, 218, 0.142);
 }
 
@@ -41,26 +42,15 @@
 	background-color: rgba(255, 255, 255, 0);
 	color: white;
 }
-.banner::after {
-	content: "";
-	width: 100vw;
-	height: 100vmin;
-	background-color: #ffffff;
-	position: absolute;
-	top: 0%;
-	left: 0;
-	clip-path: polygon(100% 68%, 0 100%, 100% 100%);
-	max-width: 100%;
-}
 
 .homeHeading {
 	text-align: center;
 	font-family: Roboto;
-	font-size: 1.4vmax;
+	font-size: 1.8vmax;
 	border-bottom: 1px solid rgba(21, 21, 21, 0.5);
 	width: 20vmax;
 	padding: 1vmax;
-	margin: 5vmax auto;
+	margin: 2vmax auto;
 	color: rgb(0, 0, 0, 0.7);
 }
 

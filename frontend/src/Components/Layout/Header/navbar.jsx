@@ -13,7 +13,6 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
@@ -32,7 +31,7 @@ const Search = styled("div")(({ theme }) => ({
 	},
 	marginLeft: 0,
 	width: "10%",
-	[theme.breakpoints.up("sm")]: {
+	[theme.breakpoints.up("xs")]: {
 		marginLeft: theme.spacing(1),
 		width: "auto",
 	},
@@ -55,12 +54,36 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 		paddingLeft: `calc(1em + ${theme.spacing(4)})`,
 		transition: theme.transitions.create("width"),
 		width: "100%",
-		[theme.breakpoints.up("sm")]: {
-			width: "40ch",
+		[theme.breakpoints.up("xs")]: {
+			width: "0.01ch",
 			"&:focus": {
-				width: "50ch",
+				width: "10ch",
 			},
 		},
+		[theme.breakpoints.up("sm")]: {
+			width: "15ch",
+			"&:focus": {
+				width: "25ch",
+			},
+		},
+		[theme.breakpoints.up("md")]: {
+			width: "10ch",
+			"&:focus": {
+				width: "35ch",
+			},
+		},
+		[theme.breakpoints.up("lg")]: {
+			width: "35ch",
+			"&:focus": {
+				width: "45ch",
+			},
+		},
+		// [theme.breakpoints.up("xs")]: {
+		// 	width: "0ch",
+		// 	"&:focus": {
+		// 		width: "0ch",
+		// 	},
+		// },
 	},
 }));
 
@@ -142,111 +165,115 @@ function ResponsiveAppBar() {
 							onClose={handleCloseNavMenu}
 							sx={{
 								display: { xs: "block", md: "none" },
+								mr: "2vmax",
 							}}
 						>
 							{pages.map((page) => (
 								<MenuItem key={page} onClick={handleCloseNavMenu}>
-									<Link to={`${page}`}>{page}</Link>
+									<Typography
+										as={Link}
+										sx={{ textDecoration: "none", color: "white" }}
+										to={`${page}`}
+									>
+										{page}
+									</Typography>
 								</MenuItem>
 							))}
 						</Menu>
 					</Box>
-					<AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
-					<Typography
-						variant="h5"
-						noWrap
-						component="a"
-						href="/"
+					<ShoppingCartIcon
 						sx={{
-							mr: 2,
 							display: { xs: "flex", md: "none" },
+							position: "absolute",
+							ml: "7vmax",
+							mr: 1,
+						}}
+					/>
+					<Box
+						sx={{
 							flexGrow: 1,
-							fontFamily: "monospace",
-							fontWeight: 700,
-							letterSpacing: ".3rem",
-							color: "inherit",
-							textDecoration: "none",
+							display: { xs: "none", md: "flex" },
 						}}
 					>
-						eCommerce
-					</Typography>
-					<Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
 						{pages.map((page) => (
 							<Button
 								key={page}
 								onClick={handleCloseNavMenu}
 								sx={{ my: 2, color: "white", display: "block" }}
 							>
-								<Link
+								<Typography
+									as={Link}
 									style={{ textDecoration: "none", color: "white" }}
 									to={`${page}`}
 								>
 									{page}
-								</Link>
+								</Typography>
 							</Button>
 						))}
 					</Box>
-					<form onSubmit={handleSubmit}>
-						<Search
-							sx={{
-								mr: 40,
-							}}
-						>
-							<SearchIconWrapper>
-								<SearchIcon />
-							</SearchIconWrapper>
-							<StyledInputBase
-								placeholder="Search..."
-								id="search"
-								inputProps={{ "aria-label": "search" }}
-								onChange={(e) => console.log(e.target.value)}
-							/>
-						</Search>
-					</form>
-
-					{isIn ? (
-						<Stack spacing={2} width="10%" direction="row">
-							<Button onClick={() => setIn(false)}>Login</Button>
-							<Button onClick={() => setIn(false)}>Register</Button>
-						</Stack>
-					) : (
-						<Box sx={{ flexGrow: 0 }}>
-							<Tooltip title="Open settings">
-								<IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-									<Avatar alt="" src="" />
-								</IconButton>
-							</Tooltip>
-							<Menu
-								sx={{ mt: "45px" }}
-								id="menu-appbar"
-								anchorEl={anchorElUser}
-								anchorOrigin={{
-									vertical: "top",
-									horizontal: "right",
+					<Box sx={{ flexGrow: 0 }}>
+						<form onSubmit={handleSubmit}>
+							<Search
+								sx={{
+									position: "absolute",
+									right: "20vmax",
+									display: "flex",
+									mr: "9vmax",
+									ml: "5vmax",
 								}}
-								keepMounted
-								transformOrigin={{
-									vertical: "top",
-									horizontal: "right",
-								}}
-								open={Boolean(anchorElUser)}
-								onClose={handleCloseUserMenu}
 							>
-								{settings.map((setting) => (
-									<MenuItem key={setting} onClick={handleCloseUserMenu}>
-										<Typography
-											sx={{ textDecoration: "none", color: "white" }}
-											as={Link}
-											to={`/${setting}`}
-											textAlign="center"
-										>
-											{setting}
-										</Typography>
-									</MenuItem>
-								))}
-							</Menu>
-						</Box>
-					)}
+								<SearchIconWrapper>
+									<SearchIcon />
+								</SearchIconWrapper>
+								<StyledInputBase
+									placeholder="Search..."
+									id="search"
+									inputProps={{ "aria-label": "search" }}
+									onChange={(e) => console.log(e.target.value)}
+								/>
+							</Search>
+						</form>
+
+						{isIn ? (
+							<Stack sx={{ flexGrow: 0 }} direction="row">
+								<Button onClick={() => setIn(false)}>Login</Button>
+								<Button onClick={() => setIn(false)}>Register</Button>
+							</Stack>
+						) : (
+							<>
+								<Tooltip title="Open settings">
+									<IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+										<Avatar
+											alt="Remy Sharp"
+											src="/static/images/avatar/2.jpg"
+										/>
+									</IconButton>
+								</Tooltip>
+								<Menu
+									sx={{ mt: "45px" }}
+									id="menu-appbar"
+									anchorEl={anchorElUser}
+									anchorOrigin={{
+										vertical: "top",
+										horizontal: "right",
+									}}
+									keepMounted
+									transformOrigin={{
+										vertical: "top",
+										horizontal: "right",
+									}}
+									open={Boolean(anchorElUser)}
+									onClose={handleCloseUserMenu}
+								>
+									{settings.map((setting) => (
+										<MenuItem key={setting} onClick={handleCloseUserMenu}>
+											<Typography textAlign="center">{setting}</Typography>
+										</MenuItem>
+									))}
+								</Menu>
+							</>
+						)}
+					</Box>
 				</Toolbar>
 			</Container>
 		</AppBar>

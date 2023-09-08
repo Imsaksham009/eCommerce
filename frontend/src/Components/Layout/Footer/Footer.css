@@ -3,7 +3,7 @@ footer {
 	position: relative;
 	left: 0;
 	bottom: 0;
-	width: 95.9%;
+	width: 95.95%;
 	padding: 2vmax;
 	background-color: rgb(34, 33, 33);
 	color: white;
@@ -40,6 +40,9 @@ footer {
 	text-align: center;
 }
 
+.midFooter > img {
+	width: 15vmax;
+}
 .midFooter > h1 {
 	font-size: 4vmax;
 	font-family: "Roboto";

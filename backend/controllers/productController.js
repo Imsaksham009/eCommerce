@@ -6,7 +6,8 @@ const AppError = require("../utils/error");
 
 // Get All Products
 exports.getProducts = catchAsync(async (req, res, next) => {
-    const resultPerPage = 5;
+    // return next(new AppError("Temp Error", 500));
+    const resultPerPage = 8;
     const totalCount = await Product.countDocuments();
     const apifeature = new ApiFeatures(Product, req.query);
     let result = apifeature.search().filter().pagination(resultPerPage);
