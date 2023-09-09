@@ -91,7 +91,7 @@ const Products = () => {
 			{loading ? (
 				<Loader />
 			) : (
-				<Container sx={{ width: "69%" }}>
+				<Container sx={{ width: "69%", minHeight: "30vh" }}>
 					<Grid
 						container
 						spacing={2}
