@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import Header from "./Components/Layout/Header/Header";
 import Home from "./Components/Home/Home.jsx";
-import Product from "./Components/ProductDetail/ProductDetail.jsx";
+import Products from "./Components/Products/Products";
 import ProductDetail from "./Components/ProductDetail/ProductDetail.jsx";
 
 const app = createBrowserRouter(
@@ -16,6 +16,8 @@ const app = createBrowserRouter(
 			<Route index element={<Home />}></Route>
 			<Route path="/home" element={<Home />}></Route>
 			<Route path="/about" element={<h1>This is About Page</h1>}></Route>
+			<Route path="/products" element={<Products />}></Route>
+			<Route path="/products/:keyword" element={<Products />}></Route>
 			<Route path="/product/:id" element={<ProductDetail />}></Route>
 		</Route>
 	)

@@ -33,6 +33,13 @@ const productSchema = new mongoose.Schema({
         }
     ],
     category: {
+        enum: ["Laptop",
+            "Smartphones",
+            "Footwear",
+            "Camera",
+            "Monitor",
+            "Games",
+            "Gym",],
         type: String,
         required: [true, "Please enter the Category of the product"]
     },

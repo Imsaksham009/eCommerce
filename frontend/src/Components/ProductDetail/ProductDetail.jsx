@@ -10,6 +10,7 @@ import "./productDetail.css";
 import { Button, Rating } from "@mui/material";
 import Loader from "../Loader/Loader";
 import { clearAllErrors } from "../../reducers/ProductDetail/productDetailAction";
+import Metadata from "../Layout/metadata";
 
 const ProductDetail = () => {
 	const dispatch = useDispatch();
@@ -55,6 +56,7 @@ const ProductDetail = () => {
 				<Loader />
 			) : (
 				<>
+					<Metadata title={`${product.name}`} />
 					<div className="ProductDetails">
 						<div>
 							<Carousel sx={{ width: "35vmax", height: "40vmax" }}>

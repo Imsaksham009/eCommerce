@@ -1,7 +1,5 @@
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
-import { styled, alpha } from "@mui/material/styles";
-import InputBase from "@mui/material/InputBase";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
@@ -13,84 +11,15 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+
+import SearchBox from "../../Search/Search.jsx";
 
 import { Link } from "react-router-dom";
 import { Stack } from "@mui/material";
 
-const pages = ["Home", "About", "Contact"];
+const pages = ["Home", "Products", "Contact"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
-
-const Search = styled("div")(({ theme }) => ({
-	position: "relative",
-	borderRadius: theme.shape.borderRadius,
-	backgroundColor: alpha(theme.palette.common.white, 0.15),
-	"&:hover": {
-		backgroundColor: alpha(theme.palette.common.white, 0.25),
-	},
-	marginLeft: 0,
-	width: "10%",
-	[theme.breakpoints.up("xs")]: {
-		marginLeft: theme.spacing(1),
-		width: "auto",
-	},
-}));
-
-const SearchIconWrapper = styled("div")(({ theme }) => ({
-	padding: theme.spacing(0, 1),
-	height: "100%",
-	position: "absolute",
-	pointerEvents: "none",
-	display: "flex",
-	alignItems: "center",
-	justifyContent: "center",
-}));
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-	color: "inherit",
-	"& .MuiInputBase-input": {
-		padding: theme.spacing(1, 1, 1, 0),
-		// vertical padding + font size from searchIcon
-		paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-		transition: theme.transitions.create("width"),
-		width: "100%",
-		[theme.breakpoints.up("xs")]: {
-			width: "0.01ch",
-			"&:focus": {
-				width: "10ch",
-			},
-		},
-		[theme.breakpoints.up("sm")]: {
-			width: "15ch",
-			"&:focus": {
-				width: "25ch",
-			},
-		},
-		[theme.breakpoints.up("md")]: {
-			width: "10ch",
-			"&:focus": {
-				width: "35ch",
-			},
-		},
-		[theme.breakpoints.up("lg")]: {
-			width: "35ch",
-			"&:focus": {
-				width: "45ch",
-			},
-		},
-		// [theme.breakpoints.up("xs")]: {
-		// 	width: "0ch",
-		// 	"&:focus": {
-		// 		width: "0ch",
-		// 	},
-		// },
-	},
-}));
-
-const handleSubmit = (e) => {
-	e.preventDefault();
-	console.log(e);
-};
 
 function ResponsiveAppBar() {
 	const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -213,28 +142,7 @@ function ResponsiveAppBar() {
 						))}
 					</Box>
 					<Box sx={{ flexGrow: 0 }}>
-						<form onSubmit={handleSubmit}>
-							<Search
-								sx={{
-									position: "absolute",
-									right: "20vmax",
-									display: "flex",
-									mr: "9vmax",
-									ml: "5vmax",
-								}}
-							>
-								<SearchIconWrapper>
-									<SearchIcon />
-								</SearchIconWrapper>
-								<StyledInputBase
-									placeholder="Search..."
-									id="search"
-									inputProps={{ "aria-label": "search" }}
-									onChange={(e) => console.log(e.target.value)}
-								/>
-							</Search>
-						</form>
-
+						<SearchBox />
 						{isIn ? (
 							<Stack sx={{ flexGrow: 0 }} direction="row">
 								<Button onClick={() => setIn(false)}>Login</Button>
