@@ -21,15 +21,24 @@ import { Stack } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 
 const pages = ["Home", "Products", "Contact"];
+<<<<<<< HEAD
 let settings = ["Orders", "Account", "Logout"];
+=======
+const settings = ["Profile", "Account", "Logout"];
+>>>>>>> 5f3f7d0a7ceeba852982b0348b0473d81a6bf20f
 
 function ResponsiveAppBar() {
 	//React-Redux Hooks
 	const dispatch = useDispatch();
 	const { isAuthenticated, user } = useSelector((state) => state.userReducer);
+<<<<<<< HEAD
 	if (user.role === "admin") {
 		// settings.push("Dashboard");
 		settings = ["Dashboard", "Orders", "Account", "Logout"];
+=======
+	if (user.role === "admin" && !settings.includes("Dashboard")) {
+		settings.push("Dashboard");
+>>>>>>> 5f3f7d0a7ceeba852982b0348b0473d81a6bf20f
 	}
 
 	const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -169,10 +178,14 @@ function ResponsiveAppBar() {
 							<>
 								<Tooltip title="Open settings">
 									<IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+<<<<<<< HEAD
 										<Avatar
 											alt="Remy Sharp"
 											src={user.avatar.url ? user.avatar.url : "./Profile.png"}
 										/>
+=======
+										<Avatar alt="Remy Sharp" src={user.avatar.url} />
+>>>>>>> 5f3f7d0a7ceeba852982b0348b0473d81a6bf20f
 									</IconButton>
 								</Tooltip>
 								<Menu
