@@ -13,13 +13,13 @@ exports.registerUser = catchAsync(async (req, res, next) => {
     const user = await User.create({
         name, email, password,
         avatar: {
-            public_id: "SampleID",
-            url: "SampleUrl"
+            public_id: req.file.filename,
+            url: req.file.path
         }
     });
     const token = user.getJsonWebToken();
 
-    res.status(200).cookie("token", token, { maxAge: (5 * 24 * 60 * 60 * 1000), httpOnly: true }).json({ success: true });
+    res.status(200).cookie("token", token, { maxAge: (5 * 24 * 60 * 60 * 1000), httpOnly: true }).json({ success: true, user });
 });
 
 
@@ -37,7 +37,7 @@ exports.loginUser = catchAsync(async (req, res, next) => {
 
     const token = user.getJsonWebToken();
 
-    res.status(200).cookie("token", token, { maxAge: (5 * 24 * 60 * 60 * 1000), httpOnly: true }).json({ success: true });
+    res.status(200).cookie("token", token, { maxAge: (5 * 24 * 60 * 60 * 1000), httpOnly: true }).json({ success: true, user });
 
 
 });

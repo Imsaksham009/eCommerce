@@ -1,15 +1,21 @@
 const express = require("express");
 const router = express.Router();
+const multer = require("multer");
+
+const { avatarStorage } = require("../cloudinary/index");
+
 
 const { registerUser, getAllUsers, loginUser, logOut, forgotPassword, resetPassword, getUserDetail, changepassword, deleteUser, updateUserRole, updateProfile, getsingleuserdetail } = require("../controllers/userController.js");
 const { isAuthenticated, isAdmin } = require("../Middleware/auth.js");
 
+const upload = multer({ storage: avatarStorage });
+
 //Register New User
-router.post("/register", registerUser);
+router.post("/register", upload.single('avatar'), registerUser);
 
 
 //Login User
-router.get("/login", loginUser);
+router.post("/login", loginUser);
 
 //Reset Password email
 router.post("/resetpassword", forgotPassword);
