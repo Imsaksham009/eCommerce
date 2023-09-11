@@ -9,9 +9,10 @@ import Home from "./Components/Home/Home.jsx";
 import Products from "./Components/Products/Products";
 import ProductDetail from "./Components/ProductDetail/ProductDetail";
 import LoginSignUp from "./Components/User/LoginSignUp.jsx";
-import Account from "./Components/Account/Account.jsx";
 import Logout from "./Components/User/logout";
 import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
+import Account from "./Components/User/Account/Account";
+import UpdatePassword from "./Components/User/UpdatePassword/UpdatePassword.jsx";
 
 const app = createBrowserRouter(
 	createRoutesFromElements(
@@ -32,9 +33,24 @@ const app = createBrowserRouter(
 					</ProtectedRoute>
 				}
 			></Route>
+			<Route
+				path="/me/password/update"
+				element={
+					<ProtectedRoute>
+						<UpdatePassword />
+					</ProtectedRoute>
+				}
+			></Route>
 			<Route path="*" element={<h1>Error Page</h1>}></Route>
 		</Route>
 	)
 );
 
 export default app;
+
+/**
+ TODO'S
+
+ 1. Update Profile
+ 2. Reset Password
+ */

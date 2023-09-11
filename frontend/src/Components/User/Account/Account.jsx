@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
 import { Button, Typography } from "@mui/material";
 
-import Loader from "../Loader/Loader";
+import Loader from "../../Loader/Loader";
 
 import "./account.css";
 
@@ -30,6 +30,7 @@ const Account = () => {
 					<h1>My Profile</h1>
 					<img src={user.avatar.url} alt={user.name} />
 					<Button
+						disabled
 						size="small"
 						variant="contained"
 						color="info"
@@ -38,9 +39,9 @@ const Account = () => {
 						<Typography
 							as={Link}
 							to="/me/update"
-							style={{ textDecoration: "none", color: "white" }}
+							style={{ textDecorationLine: "line-through", color: "black" }}
 						>
-							Edit Profile
+							❌Edit Profile❌
 						</Typography>
 					</Button>
 				</div>
@@ -60,7 +61,7 @@ const Account = () => {
 
 					<div>
 						<Link to="/orders">My Orders</Link>
-						<Link to="/password/update">Change Password</Link>
+						<Link to="/me/password/update">Change Password</Link>
 					</div>
 				</div>
 			</div>

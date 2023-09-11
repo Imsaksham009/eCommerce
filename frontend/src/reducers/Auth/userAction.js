@@ -1,11 +1,14 @@
 import axios from "axios";
 import { loginFail, loginRequest, loginSuccess, logouFail, logoutRequest, logoutSuccess, registerFail, registerRequest, registerSuccess } from "./userReducer";
+import { updatePasswordFail, updatePasswordRequest, updatePasswordSuccess } from "./updatePasswordReducer";
 
 const config = {
     headers: {
         "Content-Type": "application/json"
     }
 };
+
+//login user
 export const login = async (dispatch, email, password) => {
 
 
@@ -18,6 +21,7 @@ export const login = async (dispatch, email, password) => {
     }
 };
 
+//register user
 export const register = async (dispatch, myForm) => {
     try {
         dispatch(registerRequest());
@@ -35,6 +39,8 @@ export const register = async (dispatch, myForm) => {
     }
 };
 
+
+//user logout
 export const logout = async (dispatch) => {
     try {
         dispatch(logoutRequest());
@@ -42,6 +48,19 @@ export const logout = async (dispatch) => {
         const { data } = await axios.get("/api/v1/user/logout");
         dispatch(logoutSuccess());
     } catch (error) {
-        dispatch(logouFail(error));
+        dispatch(logouFail(error.response.data.message));
+    }
+};
+
+
+//update Password
+
+export const updatePassword = async (dispatch, oldpassword, password, confirmPassword) => {
+    try {
+        dispatch(updatePasswordRequest());
+        const { data } = await axios.put("/api/v1/user/changepassword", { oldpassword, password, confirmPassword }, config);
+        dispatch(updatePasswordSuccess(data.success));
+    } catch (error) {
+        dispatch(updatePasswordFail(error.response.data.message));
     }
 };
