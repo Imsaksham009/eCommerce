@@ -1,3 +1,4 @@
+/* eslint-disable  no-unused-vars */
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -17,14 +18,21 @@ import SearchBox from "../../Search/Search.jsx";
 
 import { Link } from "react-router-dom";
 import { Stack } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
 
 const pages = ["Home", "Products", "Contact"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const settings = ["Profile", "Account", "Logout"];
 
 function ResponsiveAppBar() {
+	//React-Redux Hooks
+	const dispatch = useDispatch();
+	const { isAuthenticated, user } = useSelector((state) => state.userReducer);
+	if (user.role === "admin" && !settings.includes("Dashboard")) {
+		settings.push("Dashboard");
+	}
+
 	const [anchorElNav, setAnchorElNav] = React.useState(null);
 	const [anchorElUser, setAnchorElUser] = React.useState(null);
-	const [isIn, setIn] = React.useState(true);
 
 	const handleOpenNavMenu = (event) => {
 		setAnchorElNav(event.currentTarget);
@@ -143,19 +151,24 @@ function ResponsiveAppBar() {
 					</Box>
 					<Box sx={{ flexGrow: 0 }}>
 						<SearchBox />
-						{isIn ? (
+						{!isAuthenticated ? (
 							<Stack sx={{ flexGrow: 0 }} direction="row">
-								<Button onClick={() => setIn(false)}>Login</Button>
-								<Button onClick={() => setIn(false)}>Register</Button>
+								<Button variant="outlined" color="error">
+									<Typography
+										as={Link}
+										to="/login"
+										style={{ textDecoration: "none", color: "white" }}
+									>
+										Login
+									</Typography>
+								</Button>
+								{/* <Button onClick={() => setIn(false)}>Register</Button> */}
 							</Stack>
 						) : (
 							<>
 								<Tooltip title="Open settings">
 									<IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-										<Avatar
-											alt="Remy Sharp"
-											src="/static/images/avatar/2.jpg"
-										/>
+										<Avatar alt="Remy Sharp" src={user.avatar.url} />
 									</IconButton>
 								</Tooltip>
 								<Menu
@@ -176,7 +189,14 @@ function ResponsiveAppBar() {
 								>
 									{settings.map((setting) => (
 										<MenuItem key={setting} onClick={handleCloseUserMenu}>
-											<Typography textAlign="center">{setting}</Typography>
+											<Typography
+												as={Link}
+												to={`/${setting}`}
+												style={{ textDecoration: "none", color: "white" }}
+												textAlign="center"
+											>
+												{setting}
+											</Typography>
 										</MenuItem>
 									))}
 								</Menu>
