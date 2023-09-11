@@ -27,7 +27,7 @@ function ResponsiveAppBar() {
 	//React-Redux Hooks
 	const dispatch = useDispatch();
 	const { isAuthenticated, user } = useSelector((state) => state.userReducer);
-	if (user.role === "admin") {
+	if (user && user.role === "admin") {
 		// settings.push("Dashboard");
 		settings = ["Dashboard", "Orders", "Account", "Logout"];
 	}

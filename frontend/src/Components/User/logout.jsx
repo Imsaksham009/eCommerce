@@ -17,6 +17,7 @@ const Logout = () => {
 
 	useEffect(() => {
 		logout(dispatch);
+		toast.success("Log Out Successfully");
 		if (!isAuthenticated) {
 			navigate("/login");
 			return;

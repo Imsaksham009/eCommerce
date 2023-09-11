@@ -1,5 +1,4 @@
 /* eslint-disable  no-unused-vars */
-import "./App.css";
 import {
 	Route,
 	createBrowserRouter,
@@ -10,7 +9,9 @@ import Home from "./Components/Home/Home.jsx";
 import Products from "./Components/Products/Products";
 import ProductDetail from "./Components/ProductDetail/ProductDetail";
 import LoginSignUp from "./Components/User/LoginSignUp.jsx";
+import Account from "./Components/Account/Account.jsx";
 import Logout from "./Components/User/logout";
+import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
 
 const app = createBrowserRouter(
 	createRoutesFromElements(
@@ -23,7 +24,15 @@ const app = createBrowserRouter(
 			<Route path="/product/:id" element={<ProductDetail />}></Route>
 			<Route path="/login" element={<LoginSignUp />}></Route>
 			<Route path="/logout" element={<Logout />}></Route>
-			<Route path="/account" element={<h1>Account Page</h1>}></Route>
+			<Route
+				path="/account"
+				element={
+					<ProtectedRoute>
+						<Account />
+					</ProtectedRoute>
+				}
+			></Route>
+			<Route path="*" element={<h1>Error Page</h1>}></Route>
 		</Route>
 	)
 );

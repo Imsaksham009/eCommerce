@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 
 const initialState = {
-    user: {}
+    user: null
 };
 
 
@@ -24,11 +24,13 @@ const userSlice = createSlice({
             state.loading = false;
             state.error = action.payload;
             state.isAuthenticated = false;
+            state.user = null;
 
         },
         registerRequest: (state) => {
             state.loading = true;
             state.isAuthenticated = false;
+            state.user = null;
         },
         registerSuccess: (state, action) => {
             state.loading = false;
@@ -40,14 +42,14 @@ const userSlice = createSlice({
             state.loading = false;
             state.error = action.payload;
             state.isAuthenticated = false;
-
+            state.user = null;
         },
         logoutRequest: (state) => {
             state.loading = true;
         },
         logoutSuccess: (state) => {
             state.loading = false;
-            state.user = {};
+            state.user = null;
             state.isAuthenticated = false;
         },
         logoutFail: (state, action) => {
