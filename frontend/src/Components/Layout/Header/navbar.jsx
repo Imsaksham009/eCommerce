@@ -21,15 +21,16 @@ import { Stack } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 
 const pages = ["Home", "Products", "Contact"];
-
 let settings = ["Orders", "Account", "Logout"];
 
 function ResponsiveAppBar() {
 	//React-Redux Hooks
 	const dispatch = useDispatch();
 	const { isAuthenticated, user } = useSelector((state) => state.userReducer);
-	if (user.role === "admin")
+	if (user.role === "admin") {
+		// settings.push("Dashboard");
 		settings = ["Dashboard", "Orders", "Account", "Logout"];
+	}
 
 	const [anchorElNav, setAnchorElNav] = React.useState(null);
 	const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -172,7 +173,6 @@ function ResponsiveAppBar() {
 											alt="Remy Sharp"
 											src={user.avatar.url ? user.avatar.url : "./Profile.png"}
 										/>
-										<Avatar alt="Remy Sharp" src={user.avatar.url} />
 									</IconButton>
 								</Tooltip>
 								<Menu
