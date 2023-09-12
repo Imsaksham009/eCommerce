@@ -1,6 +1,7 @@
 /* eslint-disable  no-unused-vars */
 import React, { useEffect } from "react";
-import MouseIcon from "@mui/icons-material/Mouse";
+import MouseOutlinedIcon from "@mui/icons-material/MouseOutlined";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ProductCard from "./Products/ProductCard";
 import "./home.css";
 import { Container, Grid } from "@mui/material";
@@ -51,7 +52,8 @@ const Home = () => {
 
 				<a href="#container">
 					<button>
-						Scroll <MouseIcon />
+						<MouseOutlinedIcon fontSize="large" color="inherit" />
+						<ArrowDropDownIcon fontSize="large" color="inherit" />
 					</button>
 				</a>
 			</div>

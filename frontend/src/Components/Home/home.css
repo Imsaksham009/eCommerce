@@ -1,5 +1,5 @@
 .banner {
-	background-image: url("../../images/cover.jfif");
+	background-image: url("../../images/ecommerce.jpg");
 	background-position: center;
 	background-repeat: no-repeat;
 	border-radius: 0% 0% 10% 10%;
@@ -27,20 +27,39 @@
 	text-shadow: 1vmax 1vmax rgba(223, 218, 218, 0.142);
 }
 
-.banner > a > button {
+.banner > a {
+	height: 8vmax;
+	width: 3vmax;
 	margin-bottom: 5vmax;
 	cursor: pointer;
-	background-color: white;
-	border: 1px solid white;
-	border-radius: 0;
+	background-color: rgba(255, 255, 255, 0);
+	border: 4px solid white;
+	border-radius: 100%;
+	border-color: white;
 	padding: 1vmax;
-	transition: all 0.5s;
-	width: 9vmax;
 	font: 500 1vmax "Roboto";
 }
-.banner > a > button:hover {
+.banner > a > button {
+	animation: xcroll 1.5s ease-in-out infinite;
 	background-color: rgba(255, 255, 255, 0);
-	color: white;
+	border: 0;
+	color: rgb(255, 255, 255);
+}
+
+@keyframes xcroll {
+	0% {
+		transform: translate(0, -10%);
+		opacity: 0;
+	}
+	20%,
+	70% {
+		opacity: 1;
+	}
+	90%,
+	100% {
+		transform: translate(0, 90%);
+		opacity: 0;
+	}
 }
 
 .homeHeading {
