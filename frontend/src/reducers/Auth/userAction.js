@@ -1,6 +1,7 @@
 import axios from "axios";
 import { loginFail, loginRequest, loginSuccess, logouFail, logoutRequest, logoutSuccess, registerFail, registerRequest, registerSuccess } from "./userReducer";
 import { updatePasswordFail, updatePasswordRequest, updatePasswordSuccess } from "./updatePasswordReducer";
+import { forgotPasswordFail, forgotPasswordRequest, forgotPasswordSuccess, resetPasswordFail, resetPasswordRequest, resetPasswordSuccess } from "./forgotPasswordReducer";
 
 const config = {
     headers: {
@@ -62,5 +63,28 @@ export const updatePassword = async (dispatch, oldpassword, password, confirmPas
         dispatch(updatePasswordSuccess(data.success));
     } catch (error) {
         dispatch(updatePasswordFail(error.response.data.message));
+    }
+};
+
+//forgot Password
+export const forgotPassword = async (dispatch, email) => {
+    try {
+        dispatch(forgotPasswordRequest());
+        const { data } = await axios.post("/api/v1/user/resetpassword", { email }, config);
+        dispatch(forgotPasswordSuccess(data));
+    } catch (error) {
+        dispatch(forgotPasswordFail(error.response.data.message));
+    }
+};
+
+//reset password
+export const resetPassword = async (dispatch, token, password, confirmPassword) => {
+    try {
+        dispatch(resetPasswordRequest());
+        const { data } = await axios.put(`/api/v1/user/password/reset/${token}`, { password, confirmPassword }, config);
+        dispatch(resetPasswordSuccess(data));
+
+    } catch (error) {
+        dispatch(resetPasswordFail(error.response.data.message));
     }
 };

@@ -13,6 +13,8 @@ import Logout from "./Components/User/logout";
 import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
 import Account from "./Components/User/Account/Account";
 import UpdatePassword from "./Components/User/UpdatePassword/UpdatePassword.jsx";
+import ForgotPass from "./Components/User/ForgotPassword/ForgotPass.jsx";
+import ForgotPassTok from "./Components/User/ForgotPassword/ForgotPassTok.jsx";
 
 const app = createBrowserRouter(
 	createRoutesFromElements(
@@ -25,6 +27,8 @@ const app = createBrowserRouter(
 			<Route path="/product/:id" element={<ProductDetail />}></Route>
 			<Route path="/login" element={<LoginSignUp />}></Route>
 			<Route path="/logout" element={<Logout />}></Route>
+			<Route path="/password/forgot" element={<ForgotPass />}></Route>
+			<Route path="/password/forgot/:token" element={<ForgotPassTok />}></Route>
 			<Route
 				path="/account"
 				element={

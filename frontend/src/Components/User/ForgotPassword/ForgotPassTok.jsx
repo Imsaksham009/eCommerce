@@ -1,50 +1,49 @@
 import React, { useEffect, useState } from "react";
-import VpnKeyIcon from "@mui/icons-material/VpnKey";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import LockIcon from "@mui/icons-material/Lock";
-import "./UpdatePassword.css";
+import "./forgotPassTok.css";
 import Loader from "../../Loader/Loader";
 import { Button } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { updatePassword } from "../../../reducers/Auth/userAction";
+import { resetPassword } from "../../../reducers/Auth/userAction";
 import { ToastContainer, toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
-import { clearALlErrors } from "../../../reducers/Auth/updatePasswordReducer";
-const UpdatePassword = () => {
-	//react-reduc hooks
-	const dispatch = useDispatch();
-	const { loading, error, isPasswordUpdated } = useSelector(
-		(state) => state.updatePasswordReducer
-	);
+import { useNavigate, useParams } from "react-router-dom";
+import { clearAllErrors } from "../../../reducers/Auth/forgotPasswordReducer";
 
-	const navigate = useNavigate();
-
-	//constants state
-	const [oldPassword, setOldPassword] = useState("");
+const ForgotPassTok = () => {
+	const params = useParams();
+	const { token } = params;
+	console.log(token);
 	const [newPassword, setNewPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
 
-	//handle Submit
-	const handle_UP_Submit = (e) => {
+	const navigate = useNavigate();
+
+	const dispatch = useDispatch();
+	const { loading, resetPass, message, error } = useSelector(
+		(state) => state.forgotPasswordReducer
+	);
+
+	const handleSubmit = (e) => {
 		e.preventDefault();
-		updatePassword(dispatch, oldPassword, newPassword, confirmPassword);
+		resetPassword(dispatch, token, newPassword, confirmPassword);
 	};
 
 	useEffect(() => {
-		if (isPasswordUpdated) {
-			toast.success("Password Updated Successfully");
-			toast.success("Redirecting to Account Page");
-			dispatch(clearALlErrors());
+		if (resetPass) {
+			toast.success(message);
+			dispatch(clearAllErrors());
 			setTimeout(() => {
-				navigate("/account");
-			}, 4000);
+				navigate("/login");
+			}, 3000);
 		}
-	}, [isPasswordUpdated, dispatch, navigate]);
+		//eslint-disable-next-line
+	}, [dispatch, resetPass, message]);
 
 	useEffect(() => {
 		if (error) {
 			toast.error(error);
-			dispatch(clearALlErrors());
+			dispatch(clearAllErrors());
 		}
 	}, [dispatch, error]);
 
@@ -71,18 +70,7 @@ const UpdatePassword = () => {
 						<div className="updatePasswordBox">
 							<h2 className="updatePasswordHeading">Update Profile</h2>
 
-							<form className="updatePasswordForm" onSubmit={handle_UP_Submit}>
-								<div className="loginPassword">
-									<VpnKeyIcon />
-									<input
-										type="password"
-										placeholder="Old Password"
-										required
-										value={oldPassword}
-										onChange={(e) => setOldPassword(e.target.value)}
-									/>
-								</div>
-
+							<form className="updatePasswordForm" onSubmit={handleSubmit}>
 								<div className="loginPassword">
 									<LockOpenIcon />
 									<input
@@ -120,4 +108,4 @@ const UpdatePassword = () => {
 	);
 };
 
-export default UpdatePassword;
+export default ForgotPassTok;

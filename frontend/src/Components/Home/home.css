@@ -17,29 +17,29 @@
 }
 
 .banner > h1 {
-	margin: 5vmax;
+	margin: 3vmax;
+	padding-right: 19%;
 	font: 800 2.5vmax "Roboto";
+	text-shadow: 1vmax 1vmax rgba(223, 218, 218, 0.142);
+	filter: drop-shadow(30px 30px 40px rgba(255, 7, 7, 0.326));
+	/* color: black; */
+	/* background-color: rgba(255, 7, 7, 0.326); */
 }
 
 .banner > h2 {
 	font: 100 2.1vmax "Lucida Sans";
-
+	padding-right: 19%;
 	text-shadow: 1vmax 1vmax rgba(223, 218, 218, 0.142);
 }
 
 .banner > a {
 	height: 8vmax;
 	width: 3vmax;
-	margin-bottom: 5vmax;
+	/* margin-bottom: 5vmax; */
+
 	cursor: pointer;
 	background-color: rgba(255, 255, 255, 0);
-	border: 4px solid white;
-	border-radius: 100%;
-	border-color: white;
-	padding: 1vmax;
 	font: 500 1vmax "Roboto";
-}
-.banner > a > button {
 	animation: xcroll 1.5s ease-in-out infinite;
 	background-color: rgba(255, 255, 255, 0);
 	border: 0;
@@ -57,7 +57,7 @@
 	}
 	90%,
 	100% {
-		transform: translate(0, 90%);
+		transform: translate(0, 80%);
 		opacity: 0;
 	}
 }

@@ -68,7 +68,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
 
     await user.save({ validateBeforeSave: false });
 
-    const resetUrl = `${req.protocol}://${req.get("host")}/api/v1/user/password/reset/${resetToken}`;
+    const resetUrl = `${req.protocol}://localhost:3000/password/forgot/${resetToken}`;
 
     const message = `Click on the url below to reset the password:\n\n\n url:- ${resetUrl}. \n\n\nIf Password reset not requested by you then please igonre this email`;
 
@@ -102,7 +102,7 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
         resetPasswordExpire: { $gt: Date.now() }
     });
 
-    if (!user) return next(new AppError("Something went wrong. Try to send email again."));
+    if (!user) return next(new AppError("Something went wrong. Try to send forgot Password email again."));
 
     if (req.body.password !== req.body.confirmPassword) {
         return next(new AppError("Password do not match.", 403));

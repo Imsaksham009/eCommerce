@@ -13,7 +13,6 @@ import {
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Loader from "../Loader/Loader";
-import { clearAllErrors } from "../../reducers/Products/productReducer";
 
 const Home = () => {
 	const dispatch = useDispatch();
@@ -47,14 +46,14 @@ const Home = () => {
 				theme="dark"
 			/>
 			<div className="banner">
-				<h2>Welcome to eCommerce</h2>
+				<h2> Welcome to eCommerce </h2>
 				<h1>FIND AMAZING PRODUCTS BELOW</h1>
 
 				<a href="#container">
-					<button>
-						<MouseOutlinedIcon fontSize="large" color="inherit" />
-						<ArrowDropDownIcon fontSize="large" color="inherit" />
-					</button>
+					{/* <button> */}
+					<MouseOutlinedIcon fontSize="large" color="inherit" />
+					<ArrowDropDownIcon fontSize="large" color="inherit" />
+					{/* </button> */}
 				</a>
 			</div>
 			<div id="container">
