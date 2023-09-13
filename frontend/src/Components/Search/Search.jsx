@@ -33,13 +33,13 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 	"& .MuiInputBase-input": {
 		padding: theme.spacing(1, 1, 1, 0),
 		// vertical padding + font size from searchIcon
-		paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+		paddingLeft: `calc(1em + ${theme.spacing(3)})`,
 		transition: theme.transitions.create("width"),
 		width: "100%",
 		[theme.breakpoints.up("xs")]: {
-			width: "0.01ch",
+			width: "0ch",
 			"&:focus": {
-				width: "10ch",
+				width: "5ch",
 			},
 		},
 		[theme.breakpoints.up("sm")]: {
@@ -55,9 +55,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 			},
 		},
 		[theme.breakpoints.up("lg")]: {
-			width: "35ch",
+			width: "25ch",
 			"&:focus": {
-				width: "45ch",
+				width: "30ch",
 			},
 		},
 	},
@@ -85,10 +85,7 @@ const SearchBox = () => {
 			<Search
 				sx={{
 					position: "absolute",
-					right: "20vmax",
-					display: "flex",
-					mr: "9vmax",
-					ml: "5vmax",
+					right: window.innerWidth > 500 ? "35vmax" : "20vmax",
 				}}
 			>
 				<SearchIconWrapper>

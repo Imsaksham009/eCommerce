@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getProductDetails } from "../../reducers/ProductDetail/productDetailAction";
@@ -11,6 +11,7 @@ import { Button, Rating } from "@mui/material";
 import Loader from "../Loader/Loader";
 import { clearAllErrors } from "../../reducers/ProductDetail/productDetailAction";
 import Metadata from "../Layout/metadata";
+import { addToCart } from "../../reducers/Cart/cartReducer";
 
 const ProductDetail = () => {
 	const dispatch = useDispatch();
@@ -19,6 +20,24 @@ const ProductDetail = () => {
 	const { error, product, loading } = useSelector(
 		(state) => state.productDetailReducer
 	);
+
+	const [value, setValue] = useState(1);
+
+	const addToCartHandler = () => {
+		dispatch(
+			addToCart({
+				product: product._id,
+				name: product.name,
+				price: product.price,
+				stock: product.stock,
+				image: product.images[0].url,
+				quantity: value,
+			})
+		);
+		toast.success("Item added to Cart", {
+			position: "bottom-right",
+		});
+	};
 
 	useEffect(() => {
 		getProductDetails(dispatch, id);
@@ -79,7 +98,6 @@ const ProductDetail = () => {
 							</div>
 
 							<div className="detailsBlock-2">
-								{/* <ReactStars {...options} /> */}
 								<Rating {...options} />
 								<span className="detailsBlock-2-span">
 									{" "}
@@ -91,15 +109,32 @@ const ProductDetail = () => {
 								<h1>{`₹${product.price}`}</h1>
 								<div className="detailsBlock-3-1">
 									<div className="detailsBlock-3-1-1">
-										<button>-</button>
-										<input readOnly type="number" value="1" />
-										<button>+</button>
+										<button
+											disabled={value === 1 ? true : false}
+											onClick={() => setValue(value - 1)}
+										>
+											-
+										</button>
+										<input
+											readOnly
+											type="number"
+											value={value}
+											min={1}
+											max={product.stock}
+										/>
+										<button
+											disabled={value === product.stock ? true : false}
+											onClick={() => setValue(value + 1)}
+										>
+											+
+										</button>
 									</div>
 									<Button
 										sx={{ margin: "1vmax" }}
 										color={product.stock < 1 ? "error" : "success"}
 										variant="outlined"
 										disabled={product.stock < 1 ? true : false}
+										onClick={addToCartHandler}
 									>
 										Add to Cart
 									</Button>

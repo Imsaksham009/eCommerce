@@ -12,12 +12,11 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-
+import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined"; // import SearchIcon from "@mui/icons-material/Search";
 import SearchBox from "../../Search/Search.jsx";
 
 import { Link } from "react-router-dom";
-import { Stack } from "@mui/material";
+import { Badge, Stack } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 
 const pages = ["Home", "Products", "Contact"];
@@ -27,6 +26,7 @@ function ResponsiveAppBar() {
 	//React-Redux Hooks
 	const dispatch = useDispatch();
 	const { isAuthenticated, user } = useSelector((state) => state.userReducer);
+	const { cartItems } = useSelector((state) => state.cartReducer);
 	if (user && user.role === "admin") {
 		// settings.push("Dashboard");
 		settings = ["Dashboard", "Orders", "Account", "Logout"];
@@ -54,10 +54,6 @@ function ResponsiveAppBar() {
 		<AppBar position="static">
 			<Container maxWidth="xl">
 				<Toolbar disableGutters>
-					<ShoppingCartIcon
-						sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
-					/>
-
 					<Typography
 						as={Link}
 						variant="h6"
@@ -119,15 +115,7 @@ function ResponsiveAppBar() {
 							))}
 						</Menu>
 					</Box>
-					<ShoppingCartIcon
-						sx={{
-							textDecoration: "none",
-							display: { xs: "flex", md: "none" },
-							position: "absolute",
-							ml: "7vmax",
-							mr: 1,
-						}}
-					/>
+
 					<Box
 						sx={{
 							flexGrow: 1,
@@ -152,9 +140,35 @@ function ResponsiveAppBar() {
 					</Box>
 					<Box sx={{ flexGrow: 0 }}>
 						<SearchBox />
+
+						<Typography
+							as={Link}
+							to="/cart"
+							sx={{ color: "white", textDecoration: "none" }}
+						>
+							<Badge
+								badgeContent={cartItems.length}
+								color="error"
+								sx={{
+									position: "absolute",
+									marginLeft: "-3.5vmax",
+									top: "1.2vmax",
+								}}
+							>
+								<ShoppingBagOutlinedIcon fontSize="large" />
+							</Badge>
+						</Typography>
+
 						{!isAuthenticated ? (
-							<Stack sx={{ flexGrow: 0 }} direction="row">
-								<Button variant="outlined" color="error">
+							<Stack
+								sx={{ flexGrow: 0, marginLeft: "1.7vmax" }}
+								direction="row"
+							>
+								<Button
+									variant="outlined"
+									color="error"
+									sx={{ marginLeft: "2vmax" }}
+								>
 									<Typography
 										as={Link}
 										to="/login"
@@ -168,7 +182,10 @@ function ResponsiveAppBar() {
 						) : (
 							<>
 								<Tooltip title="Open settings">
-									<IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+									<IconButton
+										onClick={handleOpenUserMenu}
+										sx={{ p: 0, marginLeft: "1.7vmax" }}
+									>
 										<Avatar
 											alt="Remy Sharp"
 											src={user.avatar.url ? user.avatar.url : "./Profile.png"}

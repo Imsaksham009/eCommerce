@@ -5,16 +5,17 @@ import {
 	createRoutesFromElements,
 } from "react-router-dom";
 import Header from "./Components/Layout/Header/Header";
-import Home from "./Components/Home/Home.jsx";
+import Home from "./Components/Home/Home";
 import Products from "./Components/Products/Products";
 import ProductDetail from "./Components/ProductDetail/ProductDetail";
-import LoginSignUp from "./Components/User/LoginSignUp.jsx";
+import LoginSignUp from "./Components/User/LoginSignUp";
 import Logout from "./Components/User/logout";
 import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
 import Account from "./Components/User/Account/Account";
-import UpdatePassword from "./Components/User/UpdatePassword/UpdatePassword.jsx";
-import ForgotPass from "./Components/User/ForgotPassword/ForgotPass.jsx";
-import ForgotPassTok from "./Components/User/ForgotPassword/ForgotPassTok.jsx";
+import UpdatePassword from "./Components/User/UpdatePassword/UpdatePassword";
+import ForgotPass from "./Components/User/ForgotPassword/ForgotPass";
+import ForgotPassTok from "./Components/User/ForgotPassword/ForgotPassTok";
+import Cart from "./Components/Cart/Cart";
 
 const app = createBrowserRouter(
 	createRoutesFromElements(
@@ -29,6 +30,7 @@ const app = createBrowserRouter(
 			<Route path="/logout" element={<Logout />}></Route>
 			<Route path="/password/forgot" element={<ForgotPass />}></Route>
 			<Route path="/password/forgot/:token" element={<ForgotPassTok />}></Route>
+			<Route path="/cart" element={<Cart />}></Route>
 			<Route
 				path="/account"
 				element={
