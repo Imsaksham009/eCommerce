@@ -1,7 +1,7 @@
 /*eslint-disable no-unused-vars*/
 import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, redirect, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 
 import { Button } from "@mui/material";
@@ -22,7 +22,13 @@ const LoginSignUp = () => {
 		(state) => state.userReducer
 	);
 
+	//react router dom
+	const location = useLocation();
 	const navigate = useNavigate();
+	let redirect = "/account";
+	if (location.state && location.state.from) {
+		redirect = location.state.from;
+	} else redirect = "/account";
 
 	//Refs
 	const loginTab = useRef(null);
@@ -98,10 +104,10 @@ const LoginSignUp = () => {
 			dispatch(clearAllErrors());
 		}
 		if (isAuthenticated) {
-			navigate("/account");
+			navigate(redirect);
 		}
 		//eslint-disable-next-line
-	}, [dispatch, error, isAuthenticated]);
+	}, [dispatch, error, isAuthenticated, redirect]);
 
 	return (
 		<>

@@ -4,6 +4,7 @@ import {
 	createBrowserRouter,
 	createRoutesFromElements,
 } from "react-router-dom";
+
 import Header from "./Components/Layout/Header/Header";
 import Home from "./Components/Home/Home";
 import Products from "./Components/Products/Products";
@@ -16,6 +17,9 @@ import UpdatePassword from "./Components/User/UpdatePassword/UpdatePassword";
 import ForgotPass from "./Components/User/ForgotPassword/ForgotPass";
 import ForgotPassTok from "./Components/User/ForgotPassword/ForgotPassTok";
 import Cart from "./Components/Cart/Cart";
+import ShippingInfo from "./Components/Cart/ShippingInfo";
+import ConfirmOrder from "./Components/Cart/ConfirmOrder";
+import Payment from "./Components/Cart/Payment";
 
 const app = createBrowserRouter(
 	createRoutesFromElements(
@@ -31,22 +35,39 @@ const app = createBrowserRouter(
 			<Route path="/password/forgot" element={<ForgotPass />}></Route>
 			<Route path="/password/forgot/:token" element={<ForgotPassTok />}></Route>
 			<Route path="/cart" element={<Cart />}></Route>
-			<Route
+
+			<Route element={<ProtectedRoute />}>
+				<Route path="/account" element={<Account />}></Route>
+				<Route path="/me/password/update" element={<UpdatePassword />}></Route>
+				<Route path="/shipping" element={<ShippingInfo />}></Route>
+				<Route path="/order/confirm" element={<ConfirmOrder />}></Route>
+				<Route path="/payment" element={<Payment />}></Route>
+			</Route>
+
+			{/* <Route
 				path="/account"
 				element={
 					<ProtectedRoute>
 						<Account />
 					</ProtectedRoute>
 				}
-			></Route>
-			<Route
+			></Route> */}
+			{/* <Route
 				path="/me/password/update"
 				element={
 					<ProtectedRoute>
 						<UpdatePassword />
 					</ProtectedRoute>
 				}
-			></Route>
+			></Route> */}
+			{/* <Route
+				path="/checkout"
+				element={
+					// <ProtectedRoute>
+					<ShippingInfo />
+					// </ProtectedRoute>
+				}
+			></Route> */}
 			<Route path="*" element={<h1>Error Page</h1>}></Route>
 		</Route>
 	)

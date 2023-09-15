@@ -56,6 +56,21 @@ const userSlice = createSlice({
             state.loading = false;
             state.error = action.payload;
         },
+        loadUserRequest: (state, action) => {
+            state.loading = true;
+            state.isAuthenticated = false;
+        },
+        loadUserSuccess: (state, action) => {
+            state.loading = false;
+            state.isAuthenticated = true;
+            state.user = action.payload;
+        },
+        loadUserFail: (state, action) => {
+            state.loading = false;
+            state.isAuthenticated = false;
+            state.user = null;
+        },
+
         clearAllErrors: (state) => {
             state.error = null;
         }
@@ -71,7 +86,10 @@ export const { loginRequest,
     clearAllErrors,
     logoutRequest,
     logoutSuccess,
-    logouFail
+    logouFail,
+    loadUserRequest,
+    loadUserSuccess,
+    loadUserFail
 } = userSlice.actions;
 
 export default userSlice.reducer;

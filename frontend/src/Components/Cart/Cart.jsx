@@ -3,14 +3,17 @@ import "./cart.css";
 import RemoveShoppingCartIcon from "@mui/icons-material/RemoveShoppingCart";
 import { Button, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import CartItemCard from "./CartItemCard";
 import { addToCart, removeCartItem } from "../../reducers/Cart/cartReducer";
 const Cart = () => {
 	const { cartItems } = useSelector((state) => state.cartReducer);
+	// const { isAuthenticated } = useSelector((state) => state.userReducer);
 
 	const dispatch = useDispatch();
+
+	const navigate = useNavigate();
 
 	const increaseQuantity = (item) => {
 		const newQty = item.quantity + 1;
@@ -32,6 +35,10 @@ const Cart = () => {
 			totalPrice += element.price * element.quantity;
 		});
 		return totalPrice;
+	};
+
+	const checkOutHandler = () => {
+		navigate("/shipping");
 	};
 
 	return (
@@ -85,7 +92,9 @@ const Cart = () => {
 							</div>
 							<div></div>
 							<div className="checkOutBtn">
-								<Button variant="contained">Check Out</Button>
+								<Button variant="contained" onClick={checkOutHandler}>
+									Check Out
+								</Button>
 							</div>
 						</div>
 					</div>

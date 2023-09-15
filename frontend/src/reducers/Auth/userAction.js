@@ -1,5 +1,5 @@
 import axios from "axios";
-import { loginFail, loginRequest, loginSuccess, logouFail, logoutRequest, logoutSuccess, registerFail, registerRequest, registerSuccess } from "./userReducer";
+import { loadUserFail, loadUserRequest, loadUserSuccess, loginFail, loginRequest, loginSuccess, logouFail, logoutRequest, logoutSuccess, registerFail, registerRequest, registerSuccess } from "./userReducer";
 import { updatePasswordFail, updatePasswordRequest, updatePasswordSuccess } from "./updatePasswordReducer";
 import { forgotPasswordFail, forgotPasswordRequest, forgotPasswordSuccess, resetPasswordFail, resetPasswordRequest, resetPasswordSuccess } from "./forgotPasswordReducer";
 
@@ -37,6 +37,17 @@ export const register = async (dispatch, myForm) => {
     } catch (error) {
         dispatch(registerFail(error.response.data.message));
 
+    }
+};
+
+//load user
+export const loadUser = async (dispatch) => {
+    try {
+        dispatch(loadUserRequest());
+        const { data } = await axios.get("/api/v1/user/me");
+        dispatch(loadUserSuccess(data.user));
+    } catch (error) {
+        dispatch(loadUserFail(error.response.data.message));
     }
 };
 
