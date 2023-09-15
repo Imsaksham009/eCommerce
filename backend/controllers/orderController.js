@@ -6,10 +6,7 @@ const AppError = require("../utils/error");
 
 //create new order
 async function chechStock(orderItems, problem) {
-    // for await (const order of orderItems) {
-    //     const product = await Product.findById(order.product);
-    //     console.log(product);
-    // }
+
     return new Promise((resolve) => {
         orderItems.every(async (order, i = 0) => {
             const product = await Product.findById(order.product);
@@ -64,6 +61,9 @@ exports.newOrder = catchAsync(async (req, res, next) => {
         paidAt: Date.now(),
         user: req.user._id
     });
+    orderItems.forEach(async (order) => {
+        await updateStock(order.quantity, order.product,);
+    });
     res.status(201).json({ success: true, order });
 });
 
@@ -103,11 +103,7 @@ exports.updateOrder = catchAsync(async (req, res, next) => {
     if (!order) return next(new AppError("Order not found", 404));
     if (order.orderStatus === "delivered") return next(new AppError("This Order id already delivered", 400));
 
-    order.orderItems.forEach(async (order) => {
-        await updateStock(order.quantity, order.product,);
-        console.log("first");
-    });
-    console.log("Second");
+
     order.orderStatus = req.body.status;
     if (req.body.status === "delivered") order.deliveredAt = Date.now();
 

@@ -123,7 +123,7 @@ const ProductDetail = () => {
 											max={product.stock}
 										/>
 										<button
-											disabled={value === product.stock ? true : false}
+											disabled={value >= product.stock ? true : false}
 											onClick={() => setValue(value + 1)}
 										>
 											+

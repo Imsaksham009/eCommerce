@@ -20,6 +20,7 @@ import Cart from "./Components/Cart/Cart";
 import ShippingInfo from "./Components/Cart/ShippingInfo";
 import ConfirmOrder from "./Components/Cart/ConfirmOrder";
 import Payment from "./Components/Cart/Payment";
+import OrderSuccess from "./Components/Cart/OrderSuccess.jsx";
 
 const app = createBrowserRouter(
 	createRoutesFromElements(
@@ -42,32 +43,9 @@ const app = createBrowserRouter(
 				<Route path="/shipping" element={<ShippingInfo />}></Route>
 				<Route path="/order/confirm" element={<ConfirmOrder />}></Route>
 				<Route path="/payment" element={<Payment />}></Route>
+				<Route path="/success" element={<OrderSuccess />}></Route>
 			</Route>
 
-			{/* <Route
-				path="/account"
-				element={
-					<ProtectedRoute>
-						<Account />
-					</ProtectedRoute>
-				}
-			></Route> */}
-			{/* <Route
-				path="/me/password/update"
-				element={
-					<ProtectedRoute>
-						<UpdatePassword />
-					</ProtectedRoute>
-				}
-			></Route> */}
-			{/* <Route
-				path="/checkout"
-				element={
-					// <ProtectedRoute>
-					<ShippingInfo />
-					// </ProtectedRoute>
-				}
-			></Route> */}
 			<Route path="*" element={<h1>Error Page</h1>}></Route>
 		</Route>
 	)
@@ -79,5 +57,5 @@ export default app;
  TODO'S
 
  1. Update Profile
- 2. Reset Password
+ 2. Razorpay integrate
  */

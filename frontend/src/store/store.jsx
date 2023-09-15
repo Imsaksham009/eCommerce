@@ -5,6 +5,7 @@ import userReducer from "../reducers/Auth/userReducer";
 import updatePasswordReducer from "../reducers/Auth/updatePasswordReducer";
 import forgotPasswordReducer from "../reducers/Auth/forgotPasswordReducer";
 import cartReducer from "../reducers/Cart/cartReducer";
+import orderReducer from "../reducers/Order/orderReducer";
 
 export const store = configureStore({
 	reducer: {
@@ -14,5 +15,6 @@ export const store = configureStore({
 		updatePasswordReducer,
 		forgotPasswordReducer,
 		cartReducer,
+		orderReducer,
 	},
 });
