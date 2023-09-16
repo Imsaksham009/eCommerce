@@ -228,6 +228,7 @@ const ProductDetail = () => {
 															value={rating}
 															onChange={(e) => setRating(e.target.value)}
 															precision={0.5}
+															size="large"
 															sx={{ marginBottom: "2vmax" }}
 														/>
 													</div>
