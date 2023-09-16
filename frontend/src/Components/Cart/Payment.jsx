@@ -8,8 +8,8 @@ import Loader from "../Loader/Loader";
 import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { createOrder } from "../../reducers/Order/orderAction";
-import { clearErrors } from "../../reducers/Order/orderReducer";
+import { createOrder } from "../../reducers/NewOrder/orderAction";
+import { clearErrors } from "../../reducers/NewOrder/orderReducer";
 import { clearCart } from "../../reducers/Cart/cartReducer";
 
 const Payment = () => {

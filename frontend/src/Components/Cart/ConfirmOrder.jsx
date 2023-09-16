@@ -19,7 +19,7 @@ const ConfirmOrder = () => {
 	});
 
 	const shippingCharges = subTotal > 500 ? 0 : 100;
-	const tax = subTotal * 0.28;
+	const tax = Math.floor(subTotal * 0.28);
 
 	const grandTotal = subTotal + tax + shippingCharges;
 

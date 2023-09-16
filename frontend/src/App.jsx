@@ -20,7 +20,9 @@ import Cart from "./Components/Cart/Cart";
 import ShippingInfo from "./Components/Cart/ShippingInfo";
 import ConfirmOrder from "./Components/Cart/ConfirmOrder";
 import Payment from "./Components/Cart/Payment";
-import OrderSuccess from "./Components/Cart/OrderSuccess.jsx";
+import OrderSuccess from "./Components/Cart/OrderSuccess";
+import Orders from "./Components/Order/Orders";
+import OrderDetail from "./Components/Order/OrderDetail.jsx";
 
 const app = createBrowserRouter(
 	createRoutesFromElements(
@@ -44,6 +46,9 @@ const app = createBrowserRouter(
 				<Route path="/order/confirm" element={<ConfirmOrder />}></Route>
 				<Route path="/payment" element={<Payment />}></Route>
 				<Route path="/success" element={<OrderSuccess />}></Route>
+				<Route path="/orders/me" element={<Orders />}></Route>
+				<Route path="/orders" element={<Orders />}></Route>
+				<Route path="/order/:id" element={<OrderDetail />}></Route>
 			</Route>
 
 			<Route path="*" element={<h1>Error Page</h1>}></Route>
