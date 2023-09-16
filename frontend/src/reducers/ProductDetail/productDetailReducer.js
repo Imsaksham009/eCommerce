@@ -23,13 +23,48 @@ export const productSlice = createSlice({
             state.error = action.payload;
             state.loading = false;
         },
-        clearErrors: (state, action) => {
+        newReviewRequest: (state, action) => {
+            state.loading = true;
+        },
+        newReviewSuccess: (state, action) => {
+            state.loading = false;
+            state.review = action.payload;
+        },
+        newReviewFail: (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
+        },
+        deleteReviewRequest: (state,) => {
+            state.loading = true;
+        },
+        deleteReviewSuccess: (state,) => {
+            state.loading = false;
+            state.isReviewDeleted = true;
+        },
+        deleteReviewError: (state, action) => {
+            state.loading = false;
+            state.isReviewDeleted = false;
+            state.error = action.payload;
+
+        },
+        clearErrors: (state,) => {
             state.error = null;
+            state.review = null;
+            state.isReviewDeleted = false;
         }
     }
 });
 
 
-export const { productDetailSuccess, productDetailRequest, productDetailFail, clearErrors } = productSlice.actions;
+export const { deleteReviewRequest,
+    deleteReviewSuccess,
+    deleteReviewError,
+    productDetailSuccess,
+    productDetailRequest,
+    productDetailFail,
+    clearErrors,
+    newReviewRequest,
+    newReviewSuccess,
+    newReviewFail } = productSlice.actions;
 
 export default productSlice.reducer;

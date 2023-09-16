@@ -89,23 +89,6 @@
 	color: rgba(0, 0, 0, 0.74);
 }
 
-/* .detailsBlock-3-1 > button:last-child {
-	border: none;
-	cursor: pointer;
-	color: white;
-	transition: all 0.5s;
-	background-color: tomato;
-	font: 500 0.7vmax "Roboto";
-	border-radius: 20px;
-	padding: 0.5vmax 2vmax;
-	margin: 1vmax;
-	outline: none;
-} */
-
-/* .detailsBlock-3-1 > button:last-child:hover {
-	background-color: rgb(214, 84, 61);
-} */
-
 .detailsBlock-3 > p {
 	border-top: 1px solid rgba(0, 0, 0, 0.205);
 	border-bottom: 1px solid rgba(0, 0, 0, 0.205);
@@ -170,6 +153,14 @@
 .reviewCard > p {
 	color: rgba(0, 0, 0, 0.836);
 	font: 600 0.9vmax "Roboto";
+}
+.reviewCard > svg {
+	position: relative;
+	bottom: 100%;
+	left: 50%;
+	color: rgb(128, 5, 5);
+	font: 600 1.8vmax "Roboto";
+	cursor: pointer;
 }
 .reviewCardComment {
 	color: rgba(0, 0, 0, 0.445);
@@ -262,6 +253,9 @@
 
 	.reviewCard > p {
 		font: 600 3vw "Roboto";
+	}
+	.reviewCard > svg {
+		font: 600 2vmax "Roboto";
 	}
 	.reviewCardComment {
 		font: 300 5vw cursive;

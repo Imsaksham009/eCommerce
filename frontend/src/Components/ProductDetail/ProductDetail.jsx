@@ -1,27 +1,64 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getProductDetails } from "../../reducers/ProductDetail/productDetailAction";
+import {
+	createNewReview,
+	getProductDetails,
+} from "../../reducers/ProductDetail/productDetailAction";
 import { toast, ToastContainer } from "react-toastify";
 import Carousel from "react-material-ui-carousel";
 import ReviewCard from "../ReviewCard/ReviewCard.jsx";
 
-import "./productDetail.css";
-import { Button, Rating } from "@mui/material";
+import {
+	Button,
+	Rating,
+	Typography,
+	Modal,
+	Box,
+	Fade,
+	Backdrop,
+	TextField,
+} from "@mui/material";
 import Loader from "../Loader/Loader";
 import { clearAllErrors } from "../../reducers/ProductDetail/productDetailAction";
 import Metadata from "../Layout/metadata";
 import { addToCart } from "../../reducers/Cart/cartReducer";
+import "./productDetail.css";
+
+const style = {
+	position: "absolute",
+	top: "50%",
+	left: "50%",
+	transform: "translate(-50%, -50%)",
+	width: 400,
+	bgcolor: "background.paper",
+	border: "2px solid #000",
+	boxShadow: 24,
+	p: 4,
+};
 
 const ProductDetail = () => {
 	const dispatch = useDispatch();
 
 	const { id } = useParams();
-	const { error, product, loading } = useSelector(
+	const { error, product, loading, review, isReviewDeleted } = useSelector(
 		(state) => state.productDetailReducer
 	);
 
+	const [open, setOpen] = useState(false);
+	const handleOpen = () => setOpen(true);
+	const handleClose = () => setOpen(false);
+
 	const [value, setValue] = useState(1);
+
+	const [comment, setComment] = useState("");
+	const [rating, setRating] = useState(0);
+
+	const handleNewReview = (e) => {
+		e.preventDefault();
+		createNewReview(dispatch, id, rating, comment);
+		handleClose();
+	};
 
 	const addToCartHandler = () => {
 		dispatch(
@@ -40,8 +77,16 @@ const ProductDetail = () => {
 	};
 
 	useEffect(() => {
+		if (review) {
+			toast.success(review);
+			clearAllErrors(dispatch);
+		}
+		if (isReviewDeleted) {
+			toast.success("Review Deleted");
+			clearAllErrors(dispatch);
+		}
 		getProductDetails(dispatch, id);
-	}, [dispatch, id]);
+	}, [dispatch, id, review, isReviewDeleted]);
 
 	useEffect(() => {
 		if (error) {
@@ -61,7 +106,7 @@ const ProductDetail = () => {
 		<>
 			<ToastContainer
 				position="top-right"
-				autoClose={5000}
+				autoClose={2000}
 				hideProgressBar={false}
 				newestOnTop={false}
 				closeOnClick
@@ -152,9 +197,61 @@ const ProductDetail = () => {
 								Description : <p>{product.description}</p>
 							</div>
 
-							<Button variant="outlined" color="inherit">
-								Submit Review
-							</Button>
+							<div>
+								<Button color="error" variant="outlined" onClick={handleOpen}>
+									Add A review
+								</Button>
+								<Modal
+									open={open}
+									onClose={handleClose}
+									aria-labelledby="review"
+									aria-describedby="Submit a review"
+									closeAfterTransition
+									slots={{ backdrop: Backdrop }}
+									slotProps={{
+										backdrop: {
+											timeout: 500,
+										},
+									}}
+								>
+									<Fade in={open}>
+										<Box sx={style}>
+											<Typography id="Add a Review" variant="h6" component="h2">
+												Add a Review
+											</Typography>
+											<Box sx={{ mt: 2 }}>
+												<form onSubmit={handleNewReview}>
+													<div>
+														<Rating
+															name="rating"
+															defaultValue={0}
+															value={rating}
+															onChange={(e) => setRating(e.target.value)}
+															precision={0.5}
+															sx={{ marginBottom: "2vmax" }}
+														/>
+													</div>
+													<div>
+														<TextField
+															id="outlined-basic"
+															label="Your Review"
+															variant="outlined"
+															multiline
+															value={comment}
+															maxRows={10}
+															onChange={(e) => setComment(e.target.value)}
+															sx={{ marginBottom: "2vmax", width: "25vmax" }}
+														/>
+													</div>
+													<Button type="submit" color="success">
+														Submit
+													</Button>
+												</form>
+											</Box>
+										</Box>
+									</Fade>
+								</Modal>
+							</div>
 						</div>
 					</div>
 					<div>
@@ -162,7 +259,13 @@ const ProductDetail = () => {
 						{product.reviews && product.reviews[0] ? (
 							<div className="reviews">
 								{product.reviews.map((review) => {
-									return <ReviewCard key={review._id} review={review} />;
+									return (
+										<ReviewCard
+											key={review._id}
+											review={review}
+											pid={product._id}
+										/>
+									);
 								})}
 							</div>
 						) : (
