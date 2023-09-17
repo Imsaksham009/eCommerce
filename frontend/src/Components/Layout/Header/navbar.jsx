@@ -19,8 +19,21 @@ import { Link } from "react-router-dom";
 import { Badge, Stack } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 
-const pages = ["Home", "Products", "Contact"];
-let settings = ["Orders", "Account", "Logout"];
+const pages = ["Home", "Products"];
+let settings = [
+	{
+		name: "Orders",
+		link: "/orders",
+	},
+	{
+		name: "Account",
+		link: "/account",
+	},
+	{
+		name: "Logout",
+		link: "/logout",
+	},
+]; //"Orders", "Account", "Logout"
 
 function ResponsiveAppBar() {
 	//React-Redux Hooks
@@ -29,7 +42,24 @@ function ResponsiveAppBar() {
 	const { cartItems } = useSelector((state) => state.cartReducer);
 	if (user && user.role === "admin") {
 		// settings.push("Dashboard");
-		settings = ["Dashboard", "Orders", "Account", "Logout"];
+		settings = [
+			{
+				name: "Dashboard",
+				link: "/admin/dashboard",
+			},
+			{
+				name: "Orders",
+				link: "/orders",
+			},
+			{
+				name: "Account",
+				link: "/account",
+			},
+			{
+				name: "Logout",
+				link: "/logout",
+			},
+		];
 	}
 
 	const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -209,14 +239,14 @@ function ResponsiveAppBar() {
 									onClose={handleCloseUserMenu}
 								>
 									{settings.map((setting) => (
-										<MenuItem key={setting} onClick={handleCloseUserMenu}>
+										<MenuItem key={setting.name} onClick={handleCloseUserMenu}>
 											<Typography
 												as={Link}
-												to={`/${setting}`}
+												to={`${setting.link}`}
 												style={{ textDecoration: "none", color: "white" }}
 												textAlign="center"
 											>
-												{setting}
+												{setting.name}
 											</Typography>
 										</MenuItem>
 									))}

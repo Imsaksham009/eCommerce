@@ -22,13 +22,15 @@ import ConfirmOrder from "./Components/Cart/ConfirmOrder";
 import Payment from "./Components/Cart/Payment";
 import OrderSuccess from "./Components/Cart/OrderSuccess";
 import Orders from "./Components/Order/Orders";
-import OrderDetail from "./Components/Order/OrderDetail.jsx";
-
+import OrderDetail from "./Components/Order/OrderDetail";
+import SideDrawer from "./Components/admin/Layout/Drawer";
+import AdminRoute from "./Components/ProtectedRoute/AdminRoute";
+import DashBoard from "./Components/admin/Dashboard.jsx";
 const app = createBrowserRouter(
 	createRoutesFromElements(
 		<Route path="/" element={<Header />}>
 			<Route index element={<Home />}></Route>
-			<Route path="/home" element={<Home />}></Route>
+			<Route path="home" element={<Home />}></Route>
 			<Route path="/about" element={<h1>This is About Page</h1>}></Route>
 			<Route path="/products" element={<Products />}></Route>
 			<Route path="/products/:keyword" element={<Products />}></Route>
@@ -49,6 +51,12 @@ const app = createBrowserRouter(
 				<Route path="/orders/me" element={<Orders />}></Route>
 				<Route path="/orders" element={<Orders />}></Route>
 				<Route path="/order/:id" element={<OrderDetail />}></Route>
+				<Route element={<AdminRoute />}>
+					<Route path="/admin" element={<SideDrawer />}>
+						<Route index element={<DashBoard />}></Route>={" "}
+						<Route path="dashboard" element={<DashBoard />}></Route>
+					</Route>
+				</Route>
 			</Route>
 
 			<Route path="*" element={<h1>Error Page</h1>}></Route>

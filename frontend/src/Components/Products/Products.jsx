@@ -66,7 +66,6 @@ const Products = () => {
 
 	//useEffect for Errors
 	useEffect(() => {
-		console.log("first");
 		if (error) {
 			toast.error(error);
 			clearErrors(dispatch);
