@@ -22,7 +22,7 @@ import {
 	getUsers,
 } from "../../../reducers/Admin/adminAction";
 
-const drawerWidth = window.innerWidth < 600 ? 50 : 240;
+const drawerWidth = window.innerWidth < 600 ? 50 : 200;
 
 export default function ClippedDrawer() {
 	const items = [

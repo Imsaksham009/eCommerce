@@ -43,9 +43,21 @@ const adminSlice = createSlice({
             state.loading = false;
             state.error = action.payload;
         },
+        deleteRequest: (state, action) => {
+            state.loading = true;
+        },
+        deleteSuccess: (state, action) => {
+            state.loading = false;
+            state.isDeleted = true;
+        },
+        deleteFail: (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
+        },
         clearErrors: (state, action) => {
             state.loading = false;
             state.error = null;
+            state.isDeleted = false;
         },
 
     }
@@ -61,7 +73,10 @@ export const {
     allProductsRequest,
     allProductsSuccess,
     allProductsFail,
-    clearErrors
+    clearErrors,
+    deleteRequest,
+    deleteSuccess,
+    deleteFail
 } = adminSlice.actions;
 
 export default adminSlice.reducer;

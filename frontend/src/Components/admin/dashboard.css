@@ -3,6 +3,7 @@
 	display: grid;
 	grid-template-columns: 1fr 5fr;
 	overflow: auto;
+	margin-left: 2%;
 }
 
 .dashboardContainer {
@@ -20,7 +21,7 @@
 }
 
 .dashboardSummary {
-	margin: 2rem 0;
+	margin: 2rem 10rem;
 	flex: none;
 }
 
@@ -67,7 +68,7 @@
 
 .lineChart {
 	width: 80%;
-	margin: auto;
+	margin: 2rem 10rem;
 }
 
 .doughnutChart {

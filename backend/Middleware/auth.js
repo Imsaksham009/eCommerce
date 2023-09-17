@@ -29,7 +29,7 @@ exports.isProductAuthor = catchAsync(async (req, res, next) => {
     const product = await Product.findById(req.params.id);
     if (!product) return next(new AppError("Product Not Found", 404));
 
-    if (product.user != req.user.id) return next(new AppError("Not Allowed", 403));
+    if (product.user != req.user.id) return next(new AppError("Sorry You do not own this product. Only Admin Owner can delete the product. ", 403));
 
     next();
 });

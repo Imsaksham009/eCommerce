@@ -26,6 +26,8 @@ import OrderDetail from "./Components/Order/OrderDetail";
 import SideDrawer from "./Components/admin/Layout/Drawer";
 import AdminRoute from "./Components/ProtectedRoute/AdminRoute";
 import DashBoard from "./Components/admin/Dashboard.jsx";
+import AdminProducts from "./Components/admin/Products";
+import AdminOrders from "./Components/admin/AdminOrders";
 const app = createBrowserRouter(
 	createRoutesFromElements(
 		<Route path="/" element={<Header />}>
@@ -55,6 +57,8 @@ const app = createBrowserRouter(
 					<Route path="/admin" element={<SideDrawer />}>
 						<Route index element={<DashBoard />}></Route>={" "}
 						<Route path="dashboard" element={<DashBoard />}></Route>
+						<Route path="allproducts" element={<AdminProducts />}></Route>
+						<Route path="orders" element={<AdminOrders />}></Route>
 					</Route>
 				</Route>
 			</Route>
