@@ -22,6 +22,13 @@ exports.getDetails = catchAsync(async (req, res, next) => {
     res.status(200).json({ success: true, product });
 });
 
+//Get All Products
+exports.getAllProducts = catchAsync(async (req, res, next) => {
+    const products = await Product.find({});
+    if (!products) return next(new AppError("Products Not Found", 404));
+    res.status(200).json(products);
+});
+
 //Add Product Route ---- Admin
 exports.addProduct = catchAsync(async (req, res, next) => {
     const product = new Product(req.body);

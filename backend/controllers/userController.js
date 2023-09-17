@@ -120,7 +120,7 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
 });
 
 
-//Get User Details
+//Get Logged In User Details
 exports.getUserDetail = catchAsync(async (req, res, next) => {
     const user = await User.findById(req.user.id);
     res.status(200).json({ success: true, user });
@@ -160,7 +160,7 @@ exports.updateProfile = catchAsync(async (req, res, next) => {
     res.status(200).json({ success: true, message: "User updated" });
 });
 
-//Get Single User Detail
+//Get Single User Detail  ---- ADMIN
 exports.getsingleuserdetail = catchAsync(async (req, res, next) => {
     const user = await User.findById(req.params.id);
 
@@ -169,7 +169,7 @@ exports.getsingleuserdetail = catchAsync(async (req, res, next) => {
     res.status(200).json({ success: true, user });
 });
 
-//change Role
+//change Role -----ADMIN
 exports.updateUserRole = catchAsync(async (req, res, next) => {
     const { role } = req.body;
     const user = await User.findByIdAndUpdate(req.params.id, { role }, {
@@ -180,7 +180,7 @@ exports.updateUserRole = catchAsync(async (req, res, next) => {
     res.status(200).json({ success: true, message: "User role updated", user });
 });
 
-//Delete User
+//Delete User ----- ADMIN
 exports.deleteUser = catchAsync(async (req, res, next) => {
     const user = await User.findById(req.params.id);
 

@@ -36,11 +36,12 @@ router.put("/updateuserprofile", isAuthenticated, updateProfile);
 //logout user
 router.get("/logout", logOut);
 
+//Get all Users - admin
+router.get("/admin/allusers", isAuthenticated, isAdmin, getAllUsers);
+
 // Get User Details
 router.get("/admin/:id", isAuthenticated, isAdmin, getsingleuserdetail);
 
-//Get all Users - admin
-router.get("/admin/allusers", isAuthenticated, isAdmin, getAllUsers);
 
 //change user role -- admin
 router.put("/admin/changerole/:id", isAuthenticated, isAdmin, updateUserRole);
