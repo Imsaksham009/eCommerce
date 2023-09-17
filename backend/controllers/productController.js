@@ -31,7 +31,16 @@ exports.getAllProducts = catchAsync(async (req, res, next) => {
 
 //Add Product Route ---- Admin
 exports.addProduct = catchAsync(async (req, res, next) => {
-    const product = new Product(req.body);
+    const { name, description, price, category, stock } = req.body;
+    const product = new Product({
+        name, description, price, category, stock,
+        images: [
+            {
+                public_id: req.file.filename,
+                url: req.file.path
+            }
+        ]
+    });
     product.user = req.user.id;
     await product.save();
     res.status(200).json({ success: true, product });

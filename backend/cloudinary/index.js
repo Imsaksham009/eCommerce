@@ -21,4 +21,13 @@ const avatarStorage = new CloudinaryStorage({
     },
 });
 
-module.exports = { cloudinary, avatarStorage };
+const productsStorage = new CloudinaryStorage({
+    cloudinary,
+    params: {
+        folder: 'products',
+        allowedFormats: ["jpg", "jpeg", "png"],
+        crop: 'scale'
+    }
+});
+
+module.exports = { cloudinary, avatarStorage, productsStorage };
