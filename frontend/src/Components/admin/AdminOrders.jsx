@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
+import CallMadeIcon from "@mui/icons-material/CallMade";
 import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -52,12 +53,15 @@ const AdminOrders = () => {
 			field: "actions",
 			flex: 0.3,
 			headerName: "Actions",
-			minWidth: 150,
+			minWidth: 200,
 			type: "number",
 			sortable: false,
 			renderCell: (params) => {
 				return (
 					<>
+						<Link to={`/order/${params.id}`}>
+							<CallMadeIcon sx={{ marginRight: "1vmax" }} />
+						</Link>
 						<Link to={`/admin/order/${params.id}`}>
 							<EditIcon />
 						</Link>

@@ -116,5 +116,5 @@ const Payment = () => {
 
 export default Payment;
 
-// KEY:- rzp_test_TInIY95ePQ8UnE
-//Secret Key :- PLSLt0QBEwaA3ulYzy8aeAo7
+// K:- rzp_test_TInIY95ePQ8UnE
+//S :- PLSLt0QBEwaA3ulYzy8aeAo7

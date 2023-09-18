@@ -65,14 +65,14 @@ const adminSlice = createSlice({
             state.loading = true;
             state.error = action.payload;
         },
-        updateProductRequest: (state, action) => {
+        updateRequest: (state, action) => {
             state.loading = true;
         },
-        updateProductSuccess: (state, action) => {
+        updateSuccess: (state, action) => {
             state.loading = false;
             state.isUpdated = true;
         },
-        updateProductFail: (state, action) => {
+        updateFail: (state, action) => {
             state.loading = false;
             state.error = action.payload;
 
@@ -105,9 +105,9 @@ export const {
     newProductRequest,
     newProductSuccess,
     newProductFail,
-    updateProductRequest,
-    updateProductSuccess,
-    updateProductFail,
+    updateRequest,
+    updateSuccess,
+    updateFail,
 } = adminSlice.actions;
 
 export default adminSlice.reducer;

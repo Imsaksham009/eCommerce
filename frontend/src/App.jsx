@@ -30,6 +30,7 @@ import AdminProducts from "./Components/admin/Products";
 import AdminOrders from "./Components/admin/AdminOrders";
 import AdminNewProduct from "./Components/admin/AdminNewProduct";
 import AdminEditProduct from "./Components/admin/AdminEditProduct";
+import AdminProcessOrder from "./Components/admin/AdminProcessOrder";
 
 const app = createBrowserRouter(
 	createRoutesFromElements(
@@ -62,6 +63,7 @@ const app = createBrowserRouter(
 						<Route path="dashboard" element={<DashBoard />}></Route>
 						<Route path="allproducts" element={<AdminProducts />}></Route>
 						<Route path="orders" element={<AdminOrders />}></Route>
+						<Route path="order/:id" element={<AdminProcessOrder />}></Route>
 						<Route path="newproduct" element={<AdminNewProduct />}></Route>
 						<Route path="product/:id" element={<AdminEditProduct />}></Route>
 					</Route>
