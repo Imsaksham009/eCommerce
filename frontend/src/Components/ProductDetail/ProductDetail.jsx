@@ -124,10 +124,11 @@ const ProductDetail = () => {
 						<Metadata title={`${product.name}`} />
 						<div className="ProductDetails">
 							<div>
-								<Carousel sx={{ width: "35vmax", height: "40vmax" }}>
+								<Carousel sx={{ width: "40vmax", height: "40vmax" }}>
 									{product.images &&
 										product.images.map((item, i) => (
 											<img
+												style={{ height: "80%", width: "80%" }}
 												className="CarouselImage"
 												key={i}
 												src={item.url}

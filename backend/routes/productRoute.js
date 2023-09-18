@@ -20,7 +20,7 @@ router.get("/product/details/:id", getDetails);
 router.post("/admin/product/new", isAuthenticated, isAdmin, upload.single("productimage"), addProduct);
 
 //Update Product ----- Admin Route
-router.put("/admin/product/edit/:id", isAuthenticated, isAdmin, isProductAuthor, updateProduct);
+router.put("/admin/product/edit/:id", isAuthenticated, isAdmin, isProductAuthor, upload.single("productimage"), updateProduct);
 
 //Delete Product ----- Admin Route
 router.delete("/admin/product/delete/:id", isAuthenticated, isAdmin, isProductAuthor, deleteProduct);

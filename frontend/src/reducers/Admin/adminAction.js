@@ -11,7 +11,13 @@ import {
     allordersFail,
     deleteFail,
     deleteRequest,
-    deleteSuccess
+    deleteSuccess,
+    newProductFail,
+    newProductRequest,
+    newProductSuccess,
+    updateProductRequest,
+    updateProductSuccess,
+    updateProductFail
 } from "./adminReducer";
 
 
@@ -64,3 +70,38 @@ export const deleteOrder = async (dispatch, id) => {
         dispatch(deleteFail(error.response.data.message));
     }
 };
+
+export const createNewProduct = async (dispatch, myForm) => {
+    try {
+        dispatch(newProductRequest());
+        await axios.post("/api/v1/admin/product/new", myForm, {
+            headers: {
+                "Content-Type": "multipart/form-data"
+            }
+        });
+        dispatch(newProductSuccess());
+
+
+    } catch (error) {
+        dispatch(newProductFail(error.response.data.message));
+
+    }
+};
+
+export const updateProduct = async (dispatch, myForm, id) => {
+    try {
+        dispatch(updateProductRequest());
+        await axios.put(`/api/v1/admin/product/edit/${id}`, myForm, {
+            headers: {
+                "Content-Type": "multipart/form-data"
+            }
+        });
+        dispatch(updateProductSuccess());
+
+
+    } catch (error) {
+        dispatch(updateProductFail(error.response.data.message));
+
+    }
+};
+

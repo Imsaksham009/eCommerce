@@ -2,7 +2,7 @@ import { allProductRequest, allProductSuccess, allProductFail, clearAllErrors } 
 import axios from "axios";
 
 
-export const getProducts = async (dispatch, keyword = "", page = 1, price = [100, 250000], category) => {
+export const getProducts = async (dispatch, keyword = "", page = 1, price = [0, 250000], category) => {
     try {
 
         //Products Request Action

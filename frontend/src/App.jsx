@@ -28,6 +28,9 @@ import AdminRoute from "./Components/ProtectedRoute/AdminRoute";
 import DashBoard from "./Components/admin/Dashboard.jsx";
 import AdminProducts from "./Components/admin/Products";
 import AdminOrders from "./Components/admin/AdminOrders";
+import AdminNewProduct from "./Components/admin/AdminNewProduct";
+import AdminEditProduct from "./Components/admin/AdminEditProduct";
+
 const app = createBrowserRouter(
 	createRoutesFromElements(
 		<Route path="/" element={<Header />}>
@@ -59,6 +62,8 @@ const app = createBrowserRouter(
 						<Route path="dashboard" element={<DashBoard />}></Route>
 						<Route path="allproducts" element={<AdminProducts />}></Route>
 						<Route path="orders" element={<AdminOrders />}></Route>
+						<Route path="newproduct" element={<AdminNewProduct />}></Route>
+						<Route path="product/:id" element={<AdminEditProduct />}></Route>
 					</Route>
 				</Route>
 			</Route>

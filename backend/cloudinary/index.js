@@ -26,7 +26,8 @@ const productsStorage = new CloudinaryStorage({
     params: {
         folder: 'products',
         allowedFormats: ["jpg", "jpeg", "png"],
-        crop: 'scale'
+        crop: "scale"
+
     }
 });
 

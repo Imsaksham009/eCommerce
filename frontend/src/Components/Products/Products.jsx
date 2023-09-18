@@ -37,7 +37,7 @@ const Products = () => {
 
 	//constants
 	const [page, setPage] = useState(1);
-	const [price, setPrice] = useState([100, 250000]);
+	const [price, setPrice] = useState([1, 250000]);
 	const [categ, setCateg] = useState("");
 	const { products, loading, error, totalCount } = useSelector(
 		(state) => state.productsReducer
@@ -120,7 +120,7 @@ const Products = () => {
 						value={price}
 						onChangeCommitted={handlePriceChange}
 						valueLabelDisplay="auto"
-						min={100}
+						min={1}
 						max={250000}
 						// getAriaValueText={valuetext}
 					/>

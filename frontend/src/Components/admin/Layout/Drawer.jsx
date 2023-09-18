@@ -54,7 +54,7 @@ export default function ClippedDrawer() {
 		{
 			name: "Create New Product",
 			icon: <CreateNewFolderIcon />,
-			link: "/admin/createnewproduct",
+			link: "/admin/newproduct",
 		},
 	];
 	const navigate = useNavigate();
