@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 // const cors = require("cors");
 const cookieParser = require("cookie-parser");
-
+const path = require("path");
 // app.use(cors());
 app.use(cookieParser());
 app.use(express.json({ limit: '5mb' }));
@@ -14,6 +14,11 @@ app.use('/api/v1/product/:id/review', require("./routes/reviewRoute"));
 app.use('/api/v1/user', require("./routes/userRoute.js"));
 app.use('/api/v1/order', require("./routes/orderRoute"));
 
+app.use(express.static(path.join(__dirname, "../frontend/build")));
+
+app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "../frontend/build/index.html"));
+});
 
 //error handler
 app.use((err, req, res, next) => {
