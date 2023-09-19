@@ -22,7 +22,7 @@ const ReviewCard = ({ review, pid }) => {
 
 	return (
 		<div className="reviewCard">
-			<img src={profilePng} alt="" />
+			<img src={user && user.avatar ? user.avatar.url : profilePng} alt="" />
 			<p>{review.name}</p>
 			<Rating {...options} />
 			<span>{review.comment}</span>

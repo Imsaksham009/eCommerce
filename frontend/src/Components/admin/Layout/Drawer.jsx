@@ -70,9 +70,9 @@ export default function ClippedDrawer() {
 			<Drawer
 				variant="permanent"
 				sx={{
-					zIndex: 1,
 					width: drawerWidth,
 					flexShrink: 0,
+					top: "1vmax",
 					[`& .MuiDrawer-paper`]: {
 						width: drawerWidth,
 						boxSizing: "border-box",
