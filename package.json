@@ -4,10 +4,12 @@
 	"description": "eCommerce MERN Project",
 	"main": "backend/server.js",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
 		"start": "node backend/server.js",
-		"dev": "nodemon backend/server.js",
-		"build": "cd frontend && npm run build"
+		"server": "nodemon backend/server",
+		"dev": "concurrently \"npm run server\" \"npm run frontend\"",
+		"frontend": "npm start --prefix frontend",
+		"frontendinstall": "npm install --prefix frontend",
+		"render-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
 	},
 	"repository": {
 		"type": "git",
@@ -23,6 +25,7 @@
 		"bcrypt": "^5.1.1",
 		"body-parser": "^1.20.2",
 		"cloudinary": "^1.40.0",
+		"concurrently": "^8.2.1",
 		"cookie-parser": "^1.4.6",
 		"cors": "^2.8.5",
 		"dotenv": "^16.3.1",
