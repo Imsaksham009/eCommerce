@@ -1,5 +1,5 @@
 .newProductContainer {
-	width: 100%;
+	width: 90%;
 	box-sizing: border-box;
 	background-color: rgb(255, 255, 255);
 	display: flex;
@@ -87,6 +87,7 @@
 @media screen and (max-width: 600px) {
 	.newProductContainer {
 		background-color: rgb(255, 255, 255);
+		width: 120%;
 	}
 	.createProductForm {
 		width: 40vh;

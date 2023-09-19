@@ -71,6 +71,16 @@ export const deleteOrder = async (dispatch, id) => {
     }
 };
 
+export const deleteUser = async (dispatch, id) => {
+    try {
+        dispatch(deleteRequest());
+        await axios.delete(`/api/v1/user/admin/delete/${id}`);
+        dispatch(deleteSuccess());
+    } catch (error) {
+        dispatch(deleteFail(error.response.data.message));
+    }
+};
+
 export const createNewProduct = async (dispatch, myForm) => {
     try {
         dispatch(newProductRequest());
@@ -121,5 +131,22 @@ export const updateOrder = async (dispatch, status, id) => {
 
     }
 };
+
+export const updateUser = async (dispatch, role, id) => {
+    try {
+        dispatch(updateRequest());
+        await axios.put(`/api/v1/user/admin/changerole/${id}`, { role }, {
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+        dispatch(updateSuccess());
+
+
+    } catch (error) {
+        dispatch(updateFail(error.response.data.message));
+
+    }
+}
 
 

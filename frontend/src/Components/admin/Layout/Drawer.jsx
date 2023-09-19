@@ -11,7 +11,6 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import Inventory2Icon from "@mui/icons-material/Inventory2";
 import ReceiptIcon from "@mui/icons-material/Receipt";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
-import BorderColorIcon from "@mui/icons-material/BorderColor";
 import CreateNewFolderIcon from "@mui/icons-material/CreateNewFolder";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -40,11 +39,6 @@ export default function ClippedDrawer() {
 			name: "Users",
 			icon: <PersonOutlineIcon />,
 			link: "/admin/users",
-		},
-		{
-			name: "Reviews",
-			icon: <BorderColorIcon />,
-			link: "/admin/reviews",
 		},
 		{
 			name: "All Products",

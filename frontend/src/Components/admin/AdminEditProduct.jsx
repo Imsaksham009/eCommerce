@@ -49,9 +49,7 @@ const AdminNewProduct = () => {
 	const [data, setData] = useState(defaultData);
 	const { name, price, description, category, stock, productimage } = data;
 
-	const [preview, setPreview] = useState(
-		product ? product.images[0].url : "/Profile.png"
-	);
+	const [preview, setPreview] = useState("/Profile.png");
 	const [imgLoading, setLoading] = useState(false);
 
 	const handleInputChange = (e) => {
@@ -86,6 +84,9 @@ const AdminNewProduct = () => {
 
 	useEffect(() => {
 		setData(defaultData);
+		setPreview(
+			product && product.images ? product.images[0].url : "/Profile.png"
+		);
 		// eslint-disable-next-line
 	}, [product]);
 

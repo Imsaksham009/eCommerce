@@ -22,6 +22,7 @@ export const productSlice = createSlice({
         productDetailFail: (state, action) => {
             state.error = action.payload;
             state.loading = false;
+            state.product = {};
         },
         newReviewRequest: (state, action) => {
             state.loading = true;

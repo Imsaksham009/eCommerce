@@ -6,6 +6,8 @@ const jwt = require("jsonwebtoken");
 const sendEmail = require("../utils/sendEmail");
 const crypto = require("crypto");
 
+const { cloudinary } = require("../cloudinary/index");
+
 
 //Register new user
 exports.registerUser = catchAsync(async (req, res, next) => {
@@ -187,6 +189,8 @@ exports.deleteUser = catchAsync(async (req, res, next) => {
     if (!user) return next(new AppError("User Not found", 404));
 
     if (user.role === "admin") return next(new AppError("Admin can't be deleted", 401));
+
+    await cloudinary.uploader.destroy(user.avatar.public_id);
 
     await User.findByIdAndDelete(req.params.id);
 

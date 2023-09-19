@@ -101,11 +101,11 @@ exports.allOrders = catchAsync(async (req, res, next) => {
 exports.updateOrder = catchAsync(async (req, res, next) => {
     const order = await Order.findById(req.params.id);
     if (!order) return next(new AppError("Order not found", 404));
-    if (order.orderStatus === "delivered") return next(new AppError("This Order id already delivered", 400));
+    if (order.orderStatus === "Delivered") return next(new AppError("This Order id already delivered", 400));
 
 
     order.orderStatus = req.body.status;
-    if (req.body.status === "delivered") order.deliveredAt = Date.now();
+    if (req.body.status === "Delivered") order.deliveredAt = Date.now();
 
     await order.save({ validateBeforeSave: false });
 

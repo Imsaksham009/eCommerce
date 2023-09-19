@@ -1,9 +1,9 @@
 .dashboard {
 	max-width: 80vw;
 	display: grid;
-	grid-template-columns: 1fr 5fr;
+	/* grid-template-columns: 1fr 5fr; */
 	overflow: auto;
-	margin-left: 2%;
+	/* margin-left: 2%; */
 }
 
 .dashboardContainer {
@@ -67,8 +67,8 @@
 }
 
 .lineChart {
-	width: 80%;
-	margin: 2rem 10rem;
+	width: 50%;
+	margin: 2rem 18rem;
 }
 
 .doughnutChart {
@@ -79,6 +79,18 @@
 @media screen and (max-width: 600px) {
 	.dashboard {
 		grid-template-columns: 1fr;
+	}
+
+	.dashboardSummary {
+		margin: 2rem 0;
+		flex: none;
+	}
+	.dashboardSummary > div > p {
+		font: 300 1.3rem "Roboto";
+		text-align: center;
+		padding: 1.5rem;
+		width: 50%;
+		margin: 0 2rem;
 	}
 
 	.dashboardContainer {

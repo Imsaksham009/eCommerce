@@ -155,6 +155,7 @@ const LoginSignUp = () => {
 								<input
 									type="password"
 									placeholder="Password"
+									minLength={8}
 									required
 									value={loginPassword}
 									onChange={(e) => setLoginPassword(e.target.value)}
@@ -203,6 +204,7 @@ const LoginSignUp = () => {
 								<input
 									type="password"
 									placeholder="Password"
+									minLength={8}
 									required
 									name="password"
 									value={password}

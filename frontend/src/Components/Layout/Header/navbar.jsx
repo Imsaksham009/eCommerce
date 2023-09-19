@@ -19,7 +19,7 @@ import { Link } from "react-router-dom";
 import { Badge, Stack } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 
-const pages = ["Home", "Products"];
+const pages = ["Home", "Products", "Contact"];
 let settings = [
 	{
 		name: "Orders",

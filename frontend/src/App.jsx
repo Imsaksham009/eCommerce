@@ -31,6 +31,10 @@ import AdminOrders from "./Components/admin/AdminOrders";
 import AdminNewProduct from "./Components/admin/AdminNewProduct";
 import AdminEditProduct from "./Components/admin/AdminEditProduct";
 import AdminProcessOrder from "./Components/admin/AdminProcessOrder";
+import AdminUsers from "./Components/admin/AdminUsers";
+import AdminEditUser from "./Components/admin/AdminEditUser";
+import Contact from "./Components/Layout/Contact/Contact";
+import ErrorPage from "./Components/Layout/ErrorPage";
 
 const app = createBrowserRouter(
 	createRoutesFromElements(
@@ -46,6 +50,7 @@ const app = createBrowserRouter(
 			<Route path="/password/forgot" element={<ForgotPass />}></Route>
 			<Route path="/password/forgot/:token" element={<ForgotPassTok />}></Route>
 			<Route path="/cart" element={<Cart />}></Route>
+			<Route path="/contact" element={<Contact />}></Route>
 
 			<Route element={<ProtectedRoute />}>
 				<Route path="/account" element={<Account />}></Route>
@@ -66,11 +71,13 @@ const app = createBrowserRouter(
 						<Route path="order/:id" element={<AdminProcessOrder />}></Route>
 						<Route path="newproduct" element={<AdminNewProduct />}></Route>
 						<Route path="product/:id" element={<AdminEditProduct />}></Route>
+						<Route path="users" element={<AdminUsers />}></Route>
+						<Route path="user/:id" element={<AdminEditUser />}></Route>
 					</Route>
 				</Route>
 			</Route>
 
-			<Route path="*" element={<h1>Error Page</h1>}></Route>
+			<Route path="*" element={<ErrorPage />}></Route>
 		</Route>
 	)
 );
