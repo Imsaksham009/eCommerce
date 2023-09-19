@@ -1,9 +1,12 @@
 const express = require("express");
 const app = express();
-// const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const path = require("path");
-// app.use(cors());
+
+if (process.env.NODE_ENV !== "production") {
+    require("dotenv").config({ path: "backend/config/config.env" });
+}
+
 app.use(cookieParser());
 app.use(express.json({ limit: '5mb' }));
 app.use(express.urlencoded({ extended: true }));
@@ -14,11 +17,11 @@ app.use('/api/v1/product/:id/review', require("./routes/reviewRoute"));
 app.use('/api/v1/user', require("./routes/userRoute.js"));
 app.use('/api/v1/order', require("./routes/orderRoute"));
 
-app.use(express.static(path.join(__dirname, "../frontend/build")));
+// app.use(express.static(path.join(__dirname, "../frontend/build")));
 
-app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "../frontend/build/index.html"));
-});
+// app.get("*", (req, res) => {
+//     res.sendFile(path.resolve(__dirname, "../frontend/build/index.html"));
+// });
 
 //error handler
 app.use((err, req, res, next) => {

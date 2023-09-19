@@ -1,8 +1,9 @@
 const app = require("./app");
 const connectDB = require("./Database/dbConnect");
-const dotenv = require("dotenv");
 
-dotenv.config({ path: "backend/config/config.env" });
+if (process.env.NODE_ENV !== "production") {
+    require("dotenv").config({ path: "backend/config/config.env" });
+}
 
 process.on("uncaughtException", (err) => {
     console.log(err.message);
