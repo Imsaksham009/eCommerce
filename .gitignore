@@ -1,5 +1,5 @@
 # misc
-/backend/config/config.env
+backend/config/
 /frontend/.DS_Store
 /frontend/.env.local
 /frontend/.env.development.local
@@ -45,7 +45,6 @@ bower_components
 # Compiled binary addons (https://nodejs.org/api/addons.html)
 build/Release
 
-# Dependency directories
 node_modules/
 jspm_packages/
 
