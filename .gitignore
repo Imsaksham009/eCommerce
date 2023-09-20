@@ -78,7 +78,7 @@ web_modules/
 .env.test.local
 .env.production.local
 .env.local
-backend/config/
+backend/
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache
