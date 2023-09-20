@@ -9,6 +9,10 @@
 		"dev": "npm run server",
 		"render-postbuild": "npm install && npm install --prefix frontend && npm run build --prefix frontend"
 	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Imsaksham009/eCommerce.git"
+	},
 	"author": "",
 	"license": "ISC",
 	"bugs": {
