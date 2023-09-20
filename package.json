@@ -6,7 +6,7 @@
 	"scripts": {
 		"start": "node backend/server.js",
 		"server": "nodemon backend/server",
-		"dev": "concurrently \"npm run server\" \"npm run frontend\"",
+		"dev": "npm run server",
 		"render-postbuild": "NPM_CONFIG_PRODUCTION=false npm install && npm install --prefix frontend && npm run build --prefix frontend"
 	},
 	"repository": {
