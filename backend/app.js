@@ -16,6 +16,7 @@ app.use('/api/v1', require("./routes/productRoute"));
 app.use('/api/v1/product/:id/review', require("./routes/reviewRoute"));
 app.use('/api/v1/user', require("./routes/userRoute.js"));
 app.use('/api/v1/order', require("./routes/orderRoute"));
+app.use('/api/v1/payments/', require("./routes/paymentRoute"));
 
 app.use(express.static(path.join(__dirname, "../frontend/build")));
 

@@ -1,64 +1,120 @@
-import React, { useState, useId, useEffect } from "react";
+import React, { useEffect } from "react";
 import CheckoutSteps from "./CheckoutSteps";
 import { Button } from "@mui/material";
-import CreditCardIcon from "@mui/icons-material/CreditCard";
-import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-import KeyIcon from "@mui/icons-material/Key";
 import Loader from "../Loader/Loader";
 import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { createOrder } from "../../reducers/NewOrder/orderAction";
-import { clearErrors } from "../../reducers/NewOrder/orderReducer";
+import { clearErrors as clearOrderErrors } from "../../reducers/NewOrder/orderReducer";
+import { clearErrors as clearPOrdererrors } from "../../reducers/Payment/paymentReducer";
 import { clearCart } from "../../reducers/Cart/cartReducer";
+import axios from "axios";
 
 const Payment = () => {
+	//react-reduc hooks
 	const navigate = useNavigate();
-	const [paying, setPaying] = useState(false);
-
 	const dispatch = useDispatch();
 
+	//retieve info from session
 	const { grandTotal, subTotal, shippingCharges, tax } = sessionStorage.getItem(
 		"orderPriceInfo"
 	)
 		? JSON.parse(sessionStorage.getItem("orderPriceInfo"))
 		: 0;
 
-	const { error } = useSelector((state) => state.orderReducer);
+	//get value from redux state
+	const { error, loading } = useSelector((state) => state.orderReducer);
 	const { cartItems, shippingInfo } = useSelector((state) => state.cartReducer);
-	const { _id } = useSelector((state) => state.userReducer.user);
-	const paymentInfo = {
-		id: useId(),
-		status: "Success",
-	};
+	const { user } = useSelector((state) => state.userReducer);
+	const { p_order } = useSelector((state) => state.paymentReducer);
 
-	const order = {
+	let order = {
 		shippingInfo,
 		orderItems: cartItems,
-		user: _id,
-		paymentInfo,
+		user: user._id,
 		itemsPrice: subTotal,
 		taxPrice: tax,
 		shippingPrice: shippingCharges,
 		totalPrice: grandTotal,
 	};
 
-	const handlePayButton = () => {
-		//Add RazorPay Payment
-		setPaying(true);
-		setTimeout(() => {
-			setPaying(false);
-			createOrder(dispatch, order);
-			dispatch(clearCart());
+	const handleOrder = async (response) => {
+		const { razorpay_order_id, razorpay_payment_id, razorpay_signature } =
+			response;
+		const pid = razorpay_payment_id;
+		const sign = razorpay_signature;
 
+		try {
+			await axios.post(
+				"/api/v1/payments/paymentdone",
+				{
+					oid: p_order.id,
+					pid,
+					sign,
+				},
+				{
+					headers: {
+						"Content-Type": "application/json",
+					},
+				}
+			);
+			order.paymentInfo = {
+				order_id: p_order.id,
+				razorpay_order_id,
+				razorpay_payment_id,
+				razorpay_signature,
+				status: "Success",
+			};
+			await createOrder(dispatch, order);
+			dispatch(clearCart());
+			dispatch(clearPOrdererrors());
+			sessionStorage.removeItem("orderPriceInfo");
 			navigate("/success");
-		}, 3000);
+		} catch (error) {
+			toast.error("Error Occured");
+			dispatch(clearPOrdererrors());
+		}
+	};
+
+	const options = {
+		key: "rzp_test_TInIY95ePQ8UnE",
+		amount: p_order ? p_order.amount : 0,
+		currency: p_order ? p_order.currency : "INR",
+		name: "e-Commerce",
+		description: "Order Payment",
+		image:
+			"https://res.cloudinary.com/doalxbr7e/image/upload/v1695291522/pngegg_fivqsa.png",
+		order_id: p_order ? p_order.id : "",
+		handler: handleOrder,
+		prefill: {
+			name: user.name,
+			email: user.email,
+			contact: shippingInfo.phoneNo,
+		},
+		notes: {
+			address: "Ecommerce Corp Office, Faridabad",
+		},
+		theme: {
+			color: "#3399cc",
+		},
+	};
+
+	const handlePayButton = async (e) => {
+		//Add RazorPay Payment
+		e.preventDefault();
+		if (p_order) {
+			const rzp = new window.Razorpay(options);
+			rzp.open();
+		} else {
+			navigate("/cart");
+		}
 	};
 
 	useEffect(() => {
 		if (error) {
 			toast.error(error);
-			dispatch(clearErrors());
+			dispatch(clearOrderErrors());
 		}
 	}, [dispatch, error]);
 	return (
@@ -78,43 +134,26 @@ const Payment = () => {
 
 			<CheckoutSteps activeStep={2} />
 			<div className="updatePasswordContainer">
-				{paying ? (
-					<>
+				<div className="updatePasswordBox">
+					{loading ? (
 						<Loader />
-					</>
-				) : (
-					<div className="updatePasswordBox">
+					) : (
 						<form className="updatePasswordForm" onSubmit={handlePayButton}>
-							<div className="loginPassword">
-								<CreditCardIcon />
-								<input type="number" placeholder="XXXX XXXX XXXX XXXX" />
-							</div>
-
-							<div className="loginPassword">
-								<CalendarMonthIcon />
-								<input type="month" min="2023-09" />
-							</div>
-							<div className="loginPassword">
-								<KeyIcon />
-								<input type="password" max={3} placeholder="CVV" />
-							</div>
 							<Button
-								sx={{ width: "20vmax" }}
+								sx={{ width: "20vmax", margin: "auto" }}
+								disabled={p_order ? false : true}
 								type="submit"
 								color="error"
 								variant="contained"
 							>
-								Pay ₹{grandTotal}
+								Pay ₹{grandTotal} (via RazorPay)
 							</Button>
 						</form>
-					</div>
-				)}
+					)}
+				</div>
 			</div>
 		</>
 	);
 };
 
 export default Payment;
-
-// K:- rzp_test_TInIY95ePQ8UnE
-//S :- PLSLt0QBEwaA3ulYzy8aeAo7

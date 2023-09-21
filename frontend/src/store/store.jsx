@@ -9,6 +9,7 @@ import orderReducer from "../reducers/NewOrder/orderReducer";
 import myOrdersReducer from "../reducers/Orders/myOrders";
 import orderDetailReducer from "../reducers/OrderDetail/orderDetailReducer";
 import adminReducer from "../reducers/Admin/adminReducer";
+import paymentReducer from "../reducers/Payment/paymentReducer";
 
 export const store = configureStore({
 	reducer: {
@@ -22,5 +23,6 @@ export const store = configureStore({
 		myOrdersReducer,
 		orderDetailReducer,
 		adminReducer,
+		paymentReducer,
 	},
 });

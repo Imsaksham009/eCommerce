@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CheckoutSteps from "./CheckoutSteps";
 import { Button, Typography } from "@mui/material";
 import "./confirmOrder.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { getPaymentOrder } from "../../reducers/Payment/paymentAction";
+import { toast, ToastContainer } from "react-toastify";
+import { clearErrors } from "../../reducers/Payment/paymentReducer";
+import Loader from "../Loader/Loader";
 
 const ConfirmOrder = () => {
 	const { user } = useSelector((state) => state.userReducer);
@@ -12,18 +16,23 @@ const ConfirmOrder = () => {
 
 	const navigate = useNavigate();
 
+	const dispatch = useDispatch();
+	const { loading, error, p_order } = useSelector(
+		(state) => state.paymentReducer
+	);
+
 	let subTotal = 0;
 
 	cartItems.forEach((item) => {
 		subTotal += item.price * item.quantity;
 	});
 
-	const shippingCharges = subTotal > 500 ? 0 : 100;
+	const shippingCharges = subTotal > 500 || subTotal === 0 ? 0 : 100;
 	const tax = Math.floor(subTotal * 0.28);
 
 	const grandTotal = subTotal + tax + shippingCharges;
 
-	const confirOrderHandler = () => {
+	const confirOrderHandler = async () => {
 		const data = {
 			subTotal,
 			shippingCharges,
@@ -31,10 +40,35 @@ const ConfirmOrder = () => {
 			grandTotal,
 		};
 		sessionStorage.setItem("orderPriceInfo", JSON.stringify(data));
-		navigate("/payment");
+		await getPaymentOrder(dispatch, grandTotal);
 	};
+
+	useEffect(() => {
+		if (p_order) {
+			navigate("/payment");
+		}
+	}, [p_order, navigate]);
+
+	useEffect(() => {
+		if (error) {
+			toast.error(error);
+			dispatch(clearErrors());
+		}
+	}, [dispatch, error]);
 	return (
 		<>
+			<ToastContainer
+				position="top-right"
+				autoClose={2000}
+				hideProgressBar={false}
+				newestOnTop={true}
+				closeOnClick
+				rtl={false}
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover
+				theme="light"
+			/>
 			<CheckoutSteps activeStep={1} />
 			<div className="confirmOrderPage">
 				<div>
@@ -100,14 +134,18 @@ const ConfirmOrder = () => {
 							</p>
 							<span>₹{grandTotal}</span>
 						</div>
-
-						<Button
-							onClick={confirOrderHandler}
-							color="error"
-							variant="contained"
-						>
-							Proceed To Payment
-						</Button>
+						{loading ? (
+							<Loader />
+						) : (
+							<Button
+								disabled={grandTotal === 0}
+								onClick={confirOrderHandler}
+								color="error"
+								variant="contained"
+							>
+								Proceed To Payment
+							</Button>
+						)}
 					</div>
 				</div>
 			</div>
