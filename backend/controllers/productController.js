@@ -9,10 +9,14 @@ const { cloudinary } = require("../cloudinary/index");
 exports.getProducts = catchAsync(async (req, res, next) => {
     // return next(new AppError("Temp Error", 500));
     const resultPerPage = 8;
-    const totalCount = await Product.countDocuments();
+    // const totalCount = await Product.countDocuments();
     const apifeature = new ApiFeatures(Product, req.query);
-    let result = apifeature.search().filter().pagination(resultPerPage);
-    const products = await result.query;
+    let result = apifeature.search().filter();
+    let products = await result.query;
+    // console.log(products);
+    totalCount = products.length;
+    result.pagination(resultPerPage);
+    products = await result.query.clone();
     res.status(200).json({ success: true, totalCount, products });
 });
 
