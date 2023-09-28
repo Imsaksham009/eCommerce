@@ -128,7 +128,7 @@ const ProductDetail = () => {
 									{product.images &&
 										product.images.map((item, i) => (
 											<img
-												// style={{ height: "80%", width: "100%" }}
+												style={{ height: "80%", width: "80%" }}
 												className="CarouselImage"
 												key={i}
 												src={item.url}
