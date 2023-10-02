@@ -23,9 +23,11 @@ exports.addReview = catchAsync(async (req, res, next) => {
     );
 
     if (isReviewed) {
-        foundProduct.reviews.forEach(async (rev) => {
+        foundProduct.reviews.forEach(async (rev, index) => {
             if (rev.user.toString() === req.user._id.toString()) {
+                console.log(index);
                 const review = await Review.findByIdAndUpdate(rev.id, reviewBody, { new: true, runValidators: true });
+                foundProduct.reviews[index] = review;
                 if (!review) return next(new AppError("Review Not Found", 404));
             }
         });
