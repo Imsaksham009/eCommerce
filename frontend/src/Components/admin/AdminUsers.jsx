@@ -1,14 +1,14 @@
-import React, { useEffect } from "react";
-import { DataGrid } from "@mui/x-data-grid";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-import { toast, ToastContainer } from "react-toastify";
+import { Button, Tooltip } from "@mui/material";
+import { DataGrid } from "@mui/x-data-grid";
+import React, { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { Button } from "@mui/material";
-import Loader from "../Loader/Loader";
+import { toast, ToastContainer } from "react-toastify";
 import { deleteUser, getUsers } from "../../reducers/Admin/adminAction";
 import { clearErrors } from "../../reducers/Admin/adminReducer";
+import Loader from "../Loader/Loader";
 
 const AdminUsers = () => {
 	const { users, loading, error, isDeleted } = useSelector(
@@ -51,36 +51,56 @@ const AdminUsers = () => {
 			type: "number",
 			sortable: false,
 			renderCell: (params) => {
+				console.log(params);
 				return (
 					<>
-						<Link to={`/admin/user/${params.id}`}>
-							<EditIcon />
-						</Link>
+						{params.row.email === "guptasaksham82@gmail.com" ? (
+							<>
+								<p>I am Invinsible!</p>
+								<Tooltip
+									arrow={true}
+									placement="bottom-end"
+									title={
+										<p style={{ fontSize: "1.1rem" }}>
+											Hello from the developer! You can't delete me as I am IRON
+											MAN 😎
+										</p>
+									}
+								>
+									<img src="/ironMan.png" height={"40px"} alt="ironman"></img>
+								</Tooltip>
+							</>
+						) : (
+							<>
+								<Link to={`/admin/user/${params.id}`}>
+									<EditIcon />
+								</Link>
 
-						<Button
-							onClick={() => {
-								deleteUser(dispatch, params.id);
-							}}
-						>
-							<DeleteIcon />
-						</Button>
+								<Button
+									onClick={() => {
+										deleteUser(dispatch, params.id);
+									}}
+								>
+									<DeleteIcon />
+								</Button>
+							</>
+						)}
 					</>
 				);
 			},
 		},
 	];
 
-	const rows = [];
+	const rows = useMemo(() => {
+		if (!users) return [];
 
-	users &&
-		users.forEach((user) => {
-			rows.push({
-				id: user._id,
-				email: user.email,
-				name: user.name,
-				role: user.role,
-			});
-		});
+		return users.map((user) => ({
+			id: user._id,
+			email: user.email,
+			name: user.name,
+			role: user.role,
+		}));
+	}, [users]);
 
 	useEffect(() => {
 		getUsers(dispatch);
