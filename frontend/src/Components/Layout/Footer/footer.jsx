@@ -18,7 +18,9 @@ const Footer = () => {
 				<img src={logo} alt="" />
 				<p>High Quality is our first priority</p>
 
-				<p>Copyrights 2023 &copy; Saksham Gupta</p>
+				<p>
+					Copyrights {new Date(Date.now()).getFullYear()} &copy; Saksham Gupta
+				</p>
 			</div>
 
 			<div className="rightFooter">
