@@ -7,6 +7,7 @@
 		"start": "node backend/server.js",
 		"server": "nodemon backend/server",
 		"dev": "npm run server",
+		"dev:FE": "cd ./frontend && npm start",
 		"render-postbuild": "npm install && npm install --prefix frontend && npm run build --prefix frontend"
 	},
 	"repository": {
