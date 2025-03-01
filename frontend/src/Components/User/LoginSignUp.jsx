@@ -4,14 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 
-import { Button } from "@mui/material";
-import MailOutlineIcon from "@mui/icons-material/MailOutline";
-import LockOpenIcon from "@mui/icons-material/LockOpen";
 import Face5Icon from "@mui/icons-material/Face5";
-import "./login.css";
-import { login, register } from "../../reducers/Auth/userAction";
+import LockOpenIcon from "@mui/icons-material/LockOpen";
+import MailOutlineIcon from "@mui/icons-material/MailOutline";
+import { Button } from "@mui/material";
 import { useEffect } from "react";
+import { login, register } from "../../reducers/Auth/userAction";
 import { clearAllErrors } from "../../reducers/Auth/userReducer";
+import "./login.css";
 
 import Loader from "../Loader/Loader";
 
@@ -109,6 +109,10 @@ const LoginSignUp = () => {
 		//eslint-disable-next-line
 	}, [dispatch, error, isAuthenticated, redirect]);
 
+	const insertCredentials = () => {
+		setLoginEmail("admin@sakshamecommerce.com");
+		setLoginPassword("admin@123");
+	};
 	return (
 		<>
 			<ToastContainer
@@ -140,6 +144,14 @@ const LoginSignUp = () => {
 							ref={loginTab}
 							onSubmit={handleLoginSubmit}
 						>
+							<Button
+								variant="contained"
+								color="info"
+								sx={{ width: "21vmax" }}
+								onClick={insertCredentials}
+							>
+								Insert admin Credentials
+							</Button>
 							<div className="loginEmail">
 								<MailOutlineIcon />
 								<input

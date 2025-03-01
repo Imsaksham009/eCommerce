@@ -5,36 +5,36 @@ import {
 	createRoutesFromElements,
 } from "react-router-dom";
 
-import Header from "./Components/Layout/Header/Header";
-import Home from "./Components/Home/Home";
-import Products from "./Components/Products/Products";
-import ProductDetail from "./Components/ProductDetail/ProductDetail";
-import LoginSignUp from "./Components/User/LoginSignUp";
-import Logout from "./Components/User/logout";
-import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
-import Account from "./Components/User/Account/Account";
-import UpdatePassword from "./Components/User/UpdatePassword/UpdatePassword";
-import ForgotPass from "./Components/User/ForgotPassword/ForgotPass";
-import ForgotPassTok from "./Components/User/ForgotPassword/ForgotPassTok";
-import Cart from "./Components/Cart/Cart";
-import ShippingInfo from "./Components/Cart/ShippingInfo";
-import ConfirmOrder from "./Components/Cart/ConfirmOrder";
-import Payment from "./Components/Cart/Payment";
-import OrderSuccess from "./Components/Cart/OrderSuccess";
-import Orders from "./Components/Order/Orders";
-import OrderDetail from "./Components/Order/OrderDetail";
-import SideDrawer from "./Components/admin/Layout/Drawer";
-import AdminRoute from "./Components/ProtectedRoute/AdminRoute";
-import DashBoard from "./Components/admin/Dashboard.jsx";
-import AdminProducts from "./Components/admin/Products";
-import AdminOrders from "./Components/admin/AdminOrders";
-import AdminNewProduct from "./Components/admin/AdminNewProduct";
 import AdminEditProduct from "./Components/admin/AdminEditProduct";
+import AdminEditUser from "./Components/admin/AdminEditUser";
+import AdminNewProduct from "./Components/admin/AdminNewProduct";
+import AdminOrders from "./Components/admin/AdminOrders";
 import AdminProcessOrder from "./Components/admin/AdminProcessOrder";
 import AdminUsers from "./Components/admin/AdminUsers";
-import AdminEditUser from "./Components/admin/AdminEditUser";
+import DashBoard from "./Components/admin/Dashboard.jsx";
+import SideDrawer from "./Components/admin/Layout/Drawer";
+import AdminProducts from "./Components/admin/Products";
+import Cart from "./Components/Cart/Cart";
+import ConfirmOrder from "./Components/Cart/ConfirmOrder";
+import OrderSuccess from "./Components/Cart/OrderSuccess";
+import Payment from "./Components/Cart/Payment";
+import ShippingInfo from "./Components/Cart/ShippingInfo";
+import Home from "./Components/Home/Home";
 import Contact from "./Components/Layout/Contact/Contact";
 import ErrorPage from "./Components/Layout/ErrorPage";
+import Header from "./Components/Layout/Header/Header";
+import OrderDetail from "./Components/Order/OrderDetail";
+import Orders from "./Components/Order/Orders";
+import ProductDetail from "./Components/ProductDetail/ProductDetail";
+import Products from "./Components/Products/Products";
+import AdminRoute from "./Components/ProtectedRoute/AdminRoute";
+import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
+import Account from "./Components/User/Account/Account";
+import ForgotPass from "./Components/User/ForgotPassword/ForgotPass";
+import ForgotPassTok from "./Components/User/ForgotPassword/ForgotPassTok";
+import LoginSignUp from "./Components/User/LoginSignUp";
+import Logout from "./Components/User/logout";
+import UpdatePassword from "./Components/User/UpdatePassword/UpdatePassword";
 
 const app = createBrowserRouter(
 	createRoutesFromElements(
