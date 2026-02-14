@@ -1,77 +1,220 @@
 .myOrdersPage {
-	width: 100vw;
-	max-width: 100%;
-	padding: 0 7vmax;
-	box-sizing: border-box;
-	height: 100vh;
+	width: min(1220px, calc(100% - 2rem));
+	margin: 1.6rem auto 4rem;
 	display: flex;
 	flex-direction: column;
-	margin: 1vmax;
+	gap: 1rem;
+	animation: ordersFadeIn 0.65s ease both;
 }
 
-#myOrdersHeading {
-	text-align: center;
-	font: 400 1.2vmax "Roboto";
-	padding: 0.5vmax;
-	box-sizing: border-box;
-	color: rgb(255, 255, 255);
-	transition: all 0.5s;
-	background-color: rgb(44, 44, 44);
+.ordersPageHero {
+	padding: clamp(1.2rem, 2.5vw, 2rem);
+	border-radius: 1.2rem;
+	background: linear-gradient(140deg, rgba(14, 116, 144, 0.17), rgba(249, 115, 22, 0.14));
+	border: 1px solid rgba(14, 116, 144, 0.2);
+	box-shadow: var(--shadow-soft);
+}
+
+.ordersPageEyebrow {
+	font: 600 0.78rem "Outfit", sans-serif;
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+	color: var(--brand-2);
+}
+
+.ordersPageHero > h1 {
+	margin-top: 0.45rem;
+	font: 700 clamp(1.4rem, 2.4vw, 2rem) / 1.2 "Sora", sans-serif;
+	color: var(--text);
+}
+
+.ordersPageHero > p {
+	margin-top: 0.5rem;
+	max-width: 52rem;
+	font: 400 0.98rem / 1.5 "Outfit", sans-serif;
+	color: var(--muted);
+}
+
+.ordersInsightsGrid {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: 0.8rem;
+}
+
+.orderInsightCard {
+	padding: 0.95rem;
+	border-radius: 1rem;
+	background: rgba(255, 255, 255, 0.86);
+	border: 1px solid rgba(15, 23, 42, 0.08);
+	box-shadow: var(--shadow-soft);
+}
+
+.orderInsightIcon {
+	width: 2rem;
+	height: 2rem;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 0.65rem;
+}
+
+.iconBlue {
+	background: rgba(14, 116, 144, 0.14);
+	color: #0e7490;
+}
+
+.iconGreen {
+	background: rgba(22, 163, 74, 0.14);
+	color: #16a34a;
+}
+
+.iconAmber {
+	background: rgba(245, 158, 11, 0.16);
+	color: #d97706;
+}
+
+.iconOrange {
+	background: rgba(249, 115, 22, 0.16);
+	color: #ea580c;
+}
+
+.orderInsightCard > p {
+	margin-top: 0.65rem;
+	font: 500 0.8rem "Outfit", sans-serif;
+	color: var(--muted);
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+}
+
+.orderInsightCard > h3 {
+	margin-top: 0.25rem;
+	font: 700 1.28rem "Sora", sans-serif;
+	color: var(--text);
+}
+
+.ordersTableShell {
+	padding: 0.6rem;
+	background: rgba(255, 255, 255, 0.8);
+	border-radius: 1.1rem;
+	border: 1px solid rgba(15, 23, 42, 0.08);
+	box-shadow: var(--shadow-soft);
 }
 
 .myOrdersTable {
-	background-color: white;
+	border: 0 !important;
+	font-family: "Outfit", sans-serif;
 }
 
-.myOrdersTable div {
-	font: 300 1vmax "Roboto";
-	/* color: rgba(0, 0, 0, 0.678); */
-	border: none;
+.myOrdersTable .MuiDataGrid-columnHeaders {
+	background: rgba(15, 23, 42, 0.93);
+	border-bottom: 0;
+	border-radius: 0.85rem 0.85rem 0 0;
 }
 
-.myOrdersTable a {
-	color: rgba(0, 0, 0, 0.527);
-	transition: all 0.5s;
+.myOrdersTable .MuiDataGrid-columnHeaderTitle {
+	font: 600 0.84rem "Outfit", sans-serif;
+	letter-spacing: 0.03em;
+	text-transform: uppercase;
+	color: #f8fafc;
 }
 
-.myOrdersTable a:hover {
-	color: rgb(63, 63, 63);
+.myOrdersTable .MuiDataGrid-cell {
+	border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+	font: 500 0.86rem "Outfit", sans-serif;
+	color: var(--text);
 }
 
-.MuiDataGrid-columnHeader {
-	background-color: rgb(62, 62, 62);
-	padding: 1vmax !important;
+.myOrdersTable .MuiDataGrid-row:hover {
+	background: rgba(241, 245, 249, 0.9);
 }
 
-.MuiDataGrid-columnHeader div {
-	color: rgb(255, 255, 255);
-	font: 500 1.1vmax "Roboto" !important;
+.orderIdCell {
+	font-family: "Sora", sans-serif;
+	font-size: 0.8rem;
+	letter-spacing: 0.03em;
+	color: #334155;
 }
 
-.MuiDataGrid-iconSeparator {
-	display: none !important;
+.mutedCell {
+	color: #94a3b8;
 }
 
-@media screen and (max-width: 600px) {
+.orderStatusPill {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0.28rem 0.58rem;
+	border-radius: 999px;
+	font: 600 0.74rem "Outfit", sans-serif;
+	letter-spacing: 0.03em;
+	text-transform: uppercase;
+}
+
+.statusDelivered {
+	background: rgba(22, 163, 74, 0.16);
+	color: #166534;
+}
+
+.statusProcessing {
+	background: rgba(14, 116, 144, 0.16);
+	color: #0e7490;
+}
+
+.statusPending {
+	background: rgba(245, 158, 11, 0.18);
+	color: #92400e;
+}
+
+.orderActionLink {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 2rem;
+	height: 2rem;
+	border-radius: 0.6rem;
+	color: var(--brand-2);
+	background: rgba(14, 116, 144, 0.12);
+	transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.orderActionLink:hover {
+	transform: translateY(-1px);
+	background: rgba(14, 116, 144, 0.2);
+}
+
+@keyframes ordersFadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(14px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@media screen and (max-width: 1024px) {
+	.ordersInsightsGrid {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
+@media screen and (max-width: 700px) {
 	.myOrdersPage {
-		padding: 0;
-		height: 93vh;
+		width: calc(100% - 1rem);
+		margin-top: 1rem;
 	}
 
-	#myOrdersHeading {
-		font: 400 2.2vmax "Roboto";
-		padding: 4vw;
+	.ordersInsightsGrid {
+		grid-template-columns: 1fr;
 	}
 
-	.myOrdersTable div {
-		font: 300 4vw "Roboto";
+	.ordersTableShell {
+		padding: 0.35rem;
 	}
 
-	.MuiDataGrid-columnHeader {
-		padding: 20px !important;
-	}
-
-	.MuiDataGrid-columnHeader div {
-		font: 500 5vw "Roboto" !important;
+	.myOrdersTable .MuiDataGrid-cell,
+	.myOrdersTable .MuiDataGrid-columnHeaderTitle {
+		font-size: 0.76rem;
 	}
 }

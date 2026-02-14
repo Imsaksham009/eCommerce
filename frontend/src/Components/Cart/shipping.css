@@ -5,23 +5,28 @@
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
+	background: linear-gradient(135deg, #f7efe4, #eef6f5);
+	min-height: 100vh;
 }
 
 .shippingBox {
-	background-color: white;
-	width: 25vw;
+	background-color: var(--surface);
+	width: 28vw;
 	height: 90vh;
 	box-sizing: border-box;
 	overflow: hidden;
+	border-radius: 20px;
+	box-shadow: var(--shadow);
+	border: 1px solid rgba(36, 31, 26, 0.08);
 }
 
 .shippingHeading {
 	text-align: center;
-	color: rgba(0, 0, 0, 0.664);
-	font: 400 1.3vmax "Roboto";
+	color: rgba(0, 0, 0, 0.72);
+	font: 600 1.3vmax "Space Grotesk";
 	padding: 1.3vmax;
-	border-bottom: 1px solid rgba(0, 0, 0, 0.205);
-	width: 50%;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+	width: 55%;
 	margin: auto;
 }
 
@@ -33,13 +38,14 @@
 	padding: 2vmax;
 	justify-content: space-evenly;
 	height: 80%;
-	transition: all 0.5s;
+	transition: all 0.4s ease;
 }
 
 .shippingForm > div {
 	display: flex;
 	width: 100%;
 	align-items: center;
+	position: relative;
 }
 
 .shippingForm > div > input,
@@ -48,27 +54,35 @@
 	padding-right: 1vmax;
 	width: 100%;
 	box-sizing: border-box;
-	border: 1px solid rgba(0, 0, 0, 0.267);
-	border-radius: 4px;
-	font: 300 0.9vmax cursive;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	border-radius: 10px;
+	font: 400 0.95vmax "Source Sans 3";
 	outline: none;
+	background: #fff;
+	transition: box-shadow 0.2s ease, border 0.2s ease;
+}
+
+.shippingForm > div > input:focus,
+.shippingForm > div > select:focus {
+	border: 1px solid var(--brand);
+	box-shadow: 0 0 0 3px var(--ring);
 }
 
 .shippingForm > div > svg {
 	position: absolute;
 	transform: translateX(1vmax);
 	font-size: 1.6vmax;
-	color: rgba(0, 0, 0, 0.623);
+	color: rgba(0, 0, 0, 0.55);
 }
 
 @media screen and (max-width: 600px) {
 	.shippingBox {
-		width: 100vw;
+		width: 92vw;
 		height: 95vh;
 	}
 
 	.shippingHeading {
-		font: 400 6vw "Roboto";
+		font: 600 6vw "Space Grotesk";
 		padding: 5vw;
 	}
 
@@ -79,7 +93,7 @@
 	.shippingForm > div > input,
 	.shippingForm > div > select {
 		padding: 5vw 10vw;
-		font: 300 4vw cursive;
+		font: 400 4vw "Source Sans 3";
 	}
 
 	.shippingForm > div > svg {
@@ -88,7 +102,7 @@
 	}
 
 	.shippingBtn {
-		font: 300 4vw "Roboto";
+		font: 600 4vw "Space Grotesk";
 		padding: 4vw;
 	}
 }

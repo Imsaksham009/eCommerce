@@ -7,22 +7,26 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	gap: 1vmax;
 }
 .emptyCart > svg {
 	font-size: 5vmax;
-	color: rgb(30, 30, 30);
+	color: var(--brand-2);
 }
 .emptyCart > p {
 	font-size: 2vmax;
+	font-family: "Space Grotesk";
 }
 .emptyCart > a {
-	background-color: rgb(51, 51, 51);
+	background-color: var(--brand);
 	color: white;
 	border: none;
 	padding: 1vmax 3vmax;
 	cursor: pointer;
-	font: 400 1vmax "Roboto";
+	font: 600 1vmax "Space Grotesk";
 	text-decoration: none;
+	border-radius: 999px;
+	box-shadow: var(--shadow-soft);
 }
 
 .cartPage {
@@ -30,17 +34,19 @@
 }
 
 .cartHeader {
-	background-color: rgb(61, 61, 61);
+	background-color: var(--brand-2);
 	width: 90%;
 	box-sizing: border-box;
 	margin: auto;
 	color: white;
 	display: grid;
 	grid-template-columns: 4fr 1fr 1fr;
-	font: 300 0.7vmax "Roboto";
+	font: 500 0.75vmax "Space Grotesk";
+	border-radius: 14px 14px 0 0;
+	box-shadow: var(--shadow-soft);
 }
 .cartHeader > p {
-	margin: 10px;
+	margin: 12px;
 }
 .cartHeader > p:last-child {
 	text-align: end;
@@ -51,45 +57,52 @@
 	margin: auto;
 	display: grid;
 	grid-template-columns: 4fr 1fr 1fr;
+	background: var(--surface);
+	border-radius: 0 0 14px 14px;
+	border: 1px solid rgba(36, 31, 26, 0.08);
+	box-shadow: var(--shadow-soft);
 }
 
 .cartInput {
 	display: flex;
 	align-items: center;
 	height: 8vmax;
+	gap: 0.5vmax;
 }
 
 .cartInput > button {
 	border: none;
-	background-color: rgba(0, 0, 0, 0.616);
-	padding: 0.5vmax;
+	background-color: var(--brand);
+	padding: 0.5vmax 0.8vmax;
 	cursor: pointer;
 	color: white;
-	transition: all 0.5s;
+	transition: all 0.3s ease;
+	border-radius: 8px;
 }
 .cartInput > button:hover {
-	background-color: rgba(0, 0, 0, 0.767);
+	background-color: #b94f26;
 }
 
 .cartInput > input {
-	border: none;
+	border: 1px solid rgba(36, 31, 26, 0.15);
 	padding: 0.5vmax;
-	width: 1vmax;
+	width: 2.2vmax;
 	text-align: center;
 	outline: none;
-	font: 400 0.8vmax "Roboto";
+	font: 600 0.8vmax "Space Grotesk";
 	color: rgba(0, 0, 0, 0.74);
+	border-radius: 8px;
 }
 
 .cartSubtotal {
 	display: flex;
-	padding: 0.5vmax;
+	padding: 0.5vmax 1vmax;
 	height: 8vmax;
 	align-items: center;
 	box-sizing: border-box;
-	font: 300 1vmax cursive;
+	font: 400 1vmax "Source Sans 3";
 	justify-content: flex-end;
-	color: rgba(0, 0, 0, 0.753);
+	color: rgba(0, 0, 0, 0.75);
 }
 
 .cartGrossProfit {
@@ -98,11 +111,11 @@
 }
 
 .cartGrossProfitBox {
-	border-top: 3px solid rgb(61, 61, 61);
-	margin: 1vmax 4vmax;
+	border-top: 2px solid rgba(36, 31, 26, 0.15);
+	margin: 2vmax 4vmax;
 	box-sizing: border-box;
 	padding: 2vmax 0;
-	font: 300 1vmax "Roboto";
+	font: 500 1vmax "Space Grotesk";
 	display: flex;
 	justify-content: space-between;
 }
@@ -112,17 +125,21 @@
 	justify-content: flex-end;
 }
 .checkOutBtn > button {
-	background-color: rgb(62, 62, 62);
+	background-color: var(--brand);
 	border: none;
-	padding: 0.8vmax 4vmax;
+	padding: 0.9vmax 4vmax;
 	width: 50%;
-	font: 300 0.9vmax "Roboto";
+	font: 600 0.95vmax "Space Grotesk";
 	margin: 1vmax 4vmax;
 	cursor: pointer;
-	border-radius: 30px;
+	border-radius: 999px;
+	color: white;
+	box-shadow: var(--shadow-soft);
+	transition: transform 0.2s ease, background 0.2s ease;
 }
 .checkOutBtn > button:hover {
-	background-color: rgb(0, 0, 0);
+	background-color: #b94f26;
+	transform: translateY(-2px);
 }
 
 @media screen and (max-width: 600px) {
@@ -133,7 +150,7 @@
 
 	.cartHeader {
 		width: 100%;
-		font: 300 1.7vmax "Roboto";
+		font: 500 1.7vmax "Space Grotesk";
 		grid-template-columns: 3fr 1fr 1fr;
 	}
 
@@ -153,13 +170,13 @@
 	.cartInput > input {
 		width: 2vmax;
 		padding: 1.5vmax;
-		font: 400 1.8vmax "Roboto";
+		font: 600 1.8vmax "Space Grotesk";
 	}
 
 	.cartSubtotal {
 		padding: 1.5vmax;
 		height: 20vmax;
-		font: 300 2vmax "Roboto";
+		font: 400 2vmax "Source Sans 3";
 	}
 
 	.cartGrossProfit {
@@ -169,12 +186,12 @@
 
 	.cartGrossProfitBox {
 		padding: 2vmax;
-		font: 300 2vmax "Roboto";
+		font: 600 2vmax "Space Grotesk";
 	}
 
 	.checkOutBtn > button {
 		padding: 2vmax 4vmax;
 		width: 100%;
-		font: 300 2vmax "Roboto";
+		font: 600 2vmax "Space Grotesk";
 	}
 }

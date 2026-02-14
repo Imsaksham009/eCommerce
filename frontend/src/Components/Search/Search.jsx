@@ -6,71 +6,53 @@ import { useNavigate } from "react-router-dom";
 
 const Search = styled("div")(({ theme }) => ({
 	position: "relative",
-	borderRadius: theme.shape.borderRadius,
-	backgroundColor: alpha(theme.palette.common.white, 0.15),
+	borderRadius: 999,
+	border: `1px solid ${alpha(theme.palette.common.white, 0.28)}`,
+	backgroundColor: alpha(theme.palette.common.white, 0.1),
 	"&:hover": {
-		backgroundColor: alpha(theme.palette.common.white, 0.25),
+		backgroundColor: alpha(theme.palette.common.white, 0.16),
 	},
-	marginLeft: 0,
-	width: "10%",
-	[theme.breakpoints.up("xs")]: {
-		marginLeft: theme.spacing(1),
-		width: "auto",
+	width: "100%",
+	maxWidth: "22rem",
+	[theme.breakpoints.down("md")]: {
+		maxWidth: "14rem",
+	},
+	[theme.breakpoints.down("sm")]: {
+		maxWidth: "10.5rem",
 	},
 }));
 
 const SearchIconWrapper = styled("div")(({ theme }) => ({
-	padding: theme.spacing(0, 1),
+	padding: theme.spacing(0, 1.2),
 	height: "100%",
 	position: "absolute",
 	pointerEvents: "none",
 	display: "flex",
 	alignItems: "center",
 	justifyContent: "center",
+	color: alpha(theme.palette.common.white, 0.82),
 }));
+
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
 	color: "inherit",
+	width: "100%",
 	"& .MuiInputBase-input": {
-		padding: theme.spacing(1, 1, 1, 0),
-		// vertical padding + font size from searchIcon
-		paddingLeft: `calc(1em + ${theme.spacing(3)})`,
-		transition: theme.transitions.create("width"),
+		padding: theme.spacing(0.85, 1.1, 0.85, 0),
+		paddingLeft: `calc(1em + ${theme.spacing(3.6)})`,
+		transition: theme.transitions.create(["width", "opacity"]),
+		fontFamily: "Outfit",
+		fontSize: "0.9rem",
 		width: "100%",
-		[theme.breakpoints.up("xs")]: {
-			width: "0ch",
-			"&:focus": {
-				width: "5ch",
-			},
-		},
-		[theme.breakpoints.up("sm")]: {
-			width: "15ch",
-			"&:focus": {
-				width: "25ch",
-			},
-		},
-		[theme.breakpoints.up("md")]: {
-			width: "10ch",
-			"&:focus": {
-				width: "35ch",
-			},
-		},
-		[theme.breakpoints.up("lg")]: {
-			width: "25ch",
-			"&:focus": {
-				width: "30ch",
-			},
-		},
 	},
 }));
 
 const SearchBox = () => {
 	const [keyword, setKeyword] = useState("");
+	const navigate = useNavigate();
 
 	const handleInputChange = (e) => {
 		setKeyword(e.target.value);
 	};
-
-	const navigate = useNavigate();
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -80,23 +62,18 @@ const SearchBox = () => {
 			navigate(`/products`);
 		}
 	};
+
 	return (
 		<form onSubmit={handleSubmit}>
-			<Search
-				sx={{
-					position: "absolute",
-					right: window.innerWidth > 500 ? "35vmax" : "20vmax",
-				}}
-			>
+			<Search>
 				<SearchIconWrapper>
-					<SearchIcon />
+					<SearchIcon fontSize="small" />
 				</SearchIconWrapper>
 				<StyledInputBase
-					placeholder="Search..."
+					placeholder="Search products"
 					id="search"
 					inputProps={{ "aria-label": "search" }}
 					onChange={handleInputChange}
-					onSubmit={handleSubmit}
 				/>
 			</Search>
 		</form>

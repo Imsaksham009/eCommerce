@@ -1,28 +1,74 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Sora:wght@400;500;600;700&display=swap");
+
 * {
 	margin: 0;
 	scroll-behavior: smooth;
+	box-sizing: border-box;
+}
+
+:root {
+	--bg: #eff4ff;
+	--bg-2: #f8fafc;
+	--surface: #ffffff;
+	--surface-2: #f1f5f9;
+	--text: #0f172a;
+	--muted: #5b6576;
+	--brand: #f97316;
+	--brand-2: #0e7490;
+	--accent: #f59e0b;
+	--ring: rgba(249, 115, 22, 0.35);
+	--shadow: 0 22px 46px rgba(15, 23, 42, 0.16);
+	--shadow-soft: 0 12px 28px rgba(15, 23, 42, 0.1);
+	--radius: 18px;
 }
 
 body {
 	margin: 0;
-	font-family: "Roboto", sans-serif;
+	font-family: "Outfit", sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	color: var(--text);
+	background: radial-gradient(
+			900px 350px at 8% -8%,
+			rgba(14, 116, 144, 0.18) 0%,
+			transparent 60%
+		),
+		radial-gradient(
+			850px 300px at 100% 0%,
+			rgba(249, 115, 22, 0.2) 0%,
+			transparent 58%
+		),
+		linear-gradient(160deg, var(--bg), var(--bg-2));
+	min-height: 100vh;
+}
+
+img {
+	max-width: 100%;
+	display: block;
+}
+
+a {
+	color: inherit;
+}
+
+button,
+input,
+select,
+textarea {
+	font-family: inherit;
 }
 
 code {
-	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-		monospace;
+	font-family: "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono",
+		"Courier New", monospace;
 }
 
-/* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
 	-webkit-appearance: none;
 	margin: 0;
 }
 
-/* Firefox */
 input[type="number"] {
 	-moz-appearance: textfield;
 }

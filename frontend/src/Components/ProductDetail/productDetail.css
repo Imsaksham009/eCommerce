@@ -1,15 +1,11 @@
-/* .page {
-	background-color: white;
-	width: 100vw;
-	min-height: 100vh;
-} */
 .ProductDetails {
-	background-color: rgb(255, 255, 255);
+	background-color: transparent;
 	width: 100vw;
 	max-width: 100%;
 	padding: 3vmax;
 	box-sizing: border-box;
 	display: flex;
+	gap: 2vmax;
 }
 
 .ProductDetails > div {
@@ -18,9 +14,12 @@
 	flex-direction: column;
 	justify-content: space-evenly;
 	align-items: center;
-	padding: 2vmax;
+	padding: 2.5vmax;
 	box-sizing: border-box;
-	border: 1px solid white;
+	border: 1px solid rgba(36, 31, 26, 0.08);
+	border-radius: var(--radius);
+	background: var(--surface);
+	box-shadow: var(--shadow-soft);
 }
 
 .ProductDetails > div:last-child {
@@ -31,31 +30,34 @@
 	width: 30vmax;
 	height: 30vmax;
 	margin-left: 2.4vmax;
+	border-radius: 18px;
+	object-fit: cover;
+	box-shadow: var(--shadow-soft);
 }
 
 .detailsBlock-1 > h2 {
-	color: rgb(54, 54, 54);
-	font: 600 1.6vmax "Roboto";
+	color: var(--text);
+	font: 600 1.8vmax "Space Grotesk";
 }
 
 .detailsBlock-1 > p {
-	color: rgba(54, 54, 54, 0.582);
-	font: 200 0.6vmax cursive;
+	color: rgba(36, 31, 26, 0.55);
+	font: 400 0.8vmax "Source Sans 3";
 }
 
 .detailsBlock-2 {
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
-	border-top: 1px solid rgba(0, 0, 0, 0.205);
-	border-bottom: 1px solid rgba(0, 0, 0, 0.205);
+	border-top: 1px solid rgba(0, 0, 0, 0.12);
+	border-bottom: 1px solid rgba(0, 0, 0, 0.12);
 	width: 70%;
 	padding: 1vmax 0;
 }
 
 .detailsBlock-2-span {
-	font: 200 0.8vmax cursive;
-	color: rgba(0, 0, 0, 0.699);
+	font: 500 0.85vmax "Source Sans 3";
+	color: rgba(36, 31, 26, 0.7);
 }
 
 .detailsBlock-3 {
@@ -63,54 +65,58 @@
 }
 
 .detailsBlock-3 > h1 {
-	color: rgba(17, 17, 17, 0.795);
-	font: 400 1.8vmax "Franklin Gothic Medium";
+	color: rgba(17, 17, 17, 0.9);
+	font: 600 2vmax "Space Grotesk";
 	margin: 1vmax 0;
 }
 .detailsBlock-3-1 {
 	display: flex;
 	align-items: center;
+	gap: 0.6vmax;
 }
 
 .detailsBlock-3-1-1 > button {
 	border: none;
-	background-color: rgba(0, 0, 0, 0.616);
-	padding: 0.5vmax;
+	background-color: var(--brand);
+	padding: 0.6vmax 0.8vmax;
 	cursor: pointer;
 	color: white;
-	transition: all 0.5s;
+	transition: all 0.3s ease;
+	border-radius: 8px;
 }
 .detailsBlock-3-1-1 > button:hover {
-	background-color: rgba(0, 0, 0, 0.767);
+	background-color: #b94f26;
 }
 
 .detailsBlock-3-1-1 > input {
-	border: none;
-	padding: 0.5vmax;
-	width: 1vmax;
+	border: 1px solid rgba(36, 31, 26, 0.15);
+	background: #fff;
+	padding: 0.6vmax;
+	width: 2.2vmax;
 	text-align: center;
 	outline: none;
-	font: 400 0.8vmax "Roboto";
+	font: 500 0.9vmax "Space Grotesk";
 	color: rgba(0, 0, 0, 0.74);
+	border-radius: 8px;
 }
 
 .detailsBlock-3 > p {
-	border-top: 1px solid rgba(0, 0, 0, 0.205);
-	border-bottom: 1px solid rgba(0, 0, 0, 0.205);
+	border-top: 1px solid rgba(0, 0, 0, 0.12);
+	border-bottom: 1px solid rgba(0, 0, 0, 0.12);
 	padding: 1vmax 0;
-	color: rgba(0, 0, 0, 0.651);
-	font: 400 1vmax "Roboto";
+	color: rgba(0, 0, 0, 0.65);
+	font: 400 1vmax "Source Sans 3";
 	margin: 1vmax 0;
 }
 
 .detailsBlock-4 {
-	color: rgba(0, 0, 0, 0.897);
-	font: 500 1.2vmax sans-serif;
+	color: rgba(0, 0, 0, 0.86);
+	font: 600 1.2vmax "Space Grotesk";
 }
 
 .detailsBlock-4 > p {
-	color: rgba(0, 0, 0, 0.534);
-	font: 300 0.8vmax sans-serif;
+	color: rgba(0, 0, 0, 0.55);
+	font: 400 0.9vmax "Source Sans 3";
 }
 
 .submitDialog {
@@ -118,33 +124,43 @@
 	flex-direction: column;
 }
 .submitDialogTextArea {
-	border: 1px solid rgba(0, 0, 0, 0.082);
+	border: 1px solid rgba(0, 0, 0, 0.12);
 	margin: 1vmax 0;
 	outline: none;
 	padding: 1rem;
-	font: 300 1rem "Roboto";
+	font: 400 1rem "Source Sans 3";
+	border-radius: 12px;
+	transition: box-shadow 0.2s ease, border 0.2s ease;
+}
+
+.submitDialogTextArea:focus {
+	border: 1px solid var(--brand);
+	box-shadow: 0 0 0 3px var(--ring);
 }
 
 .reviewsHeading {
-	color: #000000be;
-	font: 500 1.4vmax "Roboto";
+	color: rgba(0, 0, 0, 0.75);
+	font: 600 1.4vmax "Space Grotesk";
 	text-align: center;
-	border-bottom: 1px solid rgba(0, 0, 0, 0.226);
+	border-bottom: 2px solid rgba(0, 0, 0, 0.12);
 	padding: 1vmax;
-	width: 20vmax;
+	width: 22vmax;
 	margin: auto;
 	margin-bottom: 4vmax;
 }
 .reviews {
 	display: flex;
 	overflow: auto;
+	gap: 1vmax;
+	padding-bottom: 1vmax;
 }
 
 .reviewCard {
 	flex: none;
-
-	box-shadow: 0 0 5px rgba(0, 0, 0, 0.226);
-	border: 1px solid rgba(56, 56, 56, 0.116);
+	box-shadow: var(--shadow-soft);
+	border: 1px solid rgba(56, 56, 56, 0.1);
+	background: var(--surface);
+	border-radius: 16px;
 	width: 30vmax;
 	display: flex;
 	flex-direction: column;
@@ -156,26 +172,26 @@
 	width: 5vmax;
 }
 .reviewCard > p {
-	color: rgba(0, 0, 0, 0.836);
-	font: 600 0.9vmax "Roboto";
+	color: rgba(0, 0, 0, 0.85);
+	font: 600 0.9vmax "Space Grotesk";
 }
 .reviewCard > svg {
 	position: relative;
 	bottom: 100%;
 	left: 50%;
-	color: rgb(128, 5, 5);
-	font: 600 1.8vmax "Roboto";
+	color: var(--brand);
+	font: 600 1.8vmax "Space Grotesk";
 	cursor: pointer;
 }
 .reviewCardComment {
-	color: rgba(0, 0, 0, 0.445);
-	font: 300 0.8vmax cursive;
+	color: rgba(0, 0, 0, 0.5);
+	font: 400 0.9vmax "Source Sans 3";
 }
 
 .noReviews {
-	font: 400 1.3vmax "Gill Sans";
+	font: 500 1.3vmax "Space Grotesk";
 	text-align: center;
-	color: rgba(0, 0, 0, 0.548);
+	color: rgba(0, 0, 0, 0.55);
 }
 
 @media screen and (max-width: 600px) {
@@ -206,7 +222,7 @@
 	}
 
 	.detailsBlock-3 > h1 {
-		font: 700 3vmax "Franklin Gothic Medium";
+		font: 700 3vmax "Space Grotesk";
 		text-align: center;
 	}
 
@@ -225,11 +241,11 @@
 	.detailsBlock-3-1-1 > input {
 		padding: 1.5vmax;
 		width: 3vmax;
-		font: 400 1.8vmax "Roboto";
+		font: 500 1.8vmax "Space Grotesk";
 	}
 
 	.detailsBlock-3-1 > button:last-child {
-		font: 500 1.7vmax "Roboto";
+		font: 600 1.7vmax "Space Grotesk";
 		padding: 1.5vmax;
 		width: 20vmax;
 		margin: 3vmax 0;
@@ -238,31 +254,31 @@
 	.detailsBlock-3 > p {
 		padding: 2.5vmax 0;
 		text-align: center;
-		font: 400 2vmax "Roboto";
+		font: 400 2vmax "Source Sans 3";
 	}
 
 	.detailsBlock-4 {
-		font: 500 2.5vmax sans-serif;
+		font: 600 2.5vmax "Space Grotesk";
 	}
 
 	.detailsBlock-4 > p {
-		font: 300 1.8vmax sans-serif;
+		font: 400 1.8vmax "Source Sans 3";
 	}
 
 	.submitReview {
-		font: 500 1.7vmax "Roboto";
+		font: 600 1.7vmax "Space Grotesk";
 		padding: 1.5vmax;
 		width: 20vmax;
 		margin: 3vmax 0;
 	}
 
 	.reviewCard > p {
-		font: 600 3vw "Roboto";
+		font: 600 3vw "Space Grotesk";
 	}
 	.reviewCard > svg {
-		font: 600 2vmax "Roboto";
+		font: 600 2vmax "Space Grotesk";
 	}
 	.reviewCardComment {
-		font: 300 5vw cursive;
+		font: 400 5vw "Source Sans 3";
 	}
 }

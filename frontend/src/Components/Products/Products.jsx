@@ -9,16 +9,14 @@ import Loader from "../Loader/Loader";
 import ProductCard from "../Home/Products/ProductCard";
 
 import Pagination from "@mui/material/Pagination";
-import Stack from "@mui/material/Stack";
 import Slider from "@mui/material/Slider";
 
 import { useParams } from "react-router-dom";
-import { Container, Grid, Typography, Box } from "@mui/material";
+import { Container, Grid } from "@mui/material";
 
 import { toast, ToastContainer } from "react-toastify";
 import "./products.css";
 
-//constants
 const categories = [
 	"Laptop",
 	"Smartphones",
@@ -30,50 +28,51 @@ const categories = [
 ];
 
 const Products = () => {
-	//Params Value
 	const { keyword } = useParams();
-	//Dispatch Fun
 	const dispatch = useDispatch();
 
-	//constants
 	const [page, setPage] = useState(1);
 	const [price, setPrice] = useState([1, 2500]);
 	const [categ, setCateg] = useState("");
 	const { products, loading, error, totalCount } = useSelector(
-		(state) => state.productsReducer
+		(state) => state.productsReducer,
 	);
-	let totalPages = totalCount ? Number(Math.ceil(totalCount / 8)) : 1;
 
-	//Page Change handler
+	const totalPages = totalCount ? Number(Math.ceil(totalCount / 8)) : 1;
+
 	const handlePageChange = (event, value) => {
 		setPage(value);
 	};
 
-	//price change handler
-	const handlePriceChange = (e, newVal) => {
+	const handlePriceChange = (event, newVal) => {
 		setPrice(newVal);
+		setPage(1);
 	};
 
-	//category change handler
-	const handleCategChange = (e, category) => {
+	const handleCategoryChange = (category) => {
 		setCateg(category);
+		setPage(1);
 	};
 
-	//UseEffect for products
+	const handleResetFilters = () => {
+		setPrice([1, 2500]);
+		setCateg("");
+		setPage(1);
+	};
+
 	useEffect(() => {
 		getProducts(dispatch, keyword, page, price, categ);
 	}, [dispatch, keyword, page, price, categ]);
 
-	//useEffect for Errors
 	useEffect(() => {
 		if (error) {
 			toast.error(error);
 			clearErrors(dispatch);
 		}
-	}, [dispatch, error, page]);
+	}, [dispatch, error]);
 
 	return (
-		<div>
+		<div className="productsPage">
 			<ToastContainer
 				position="top-right"
 				autoClose={5000}
@@ -86,74 +85,107 @@ const Products = () => {
 				pauseOnHover
 				theme="light"
 			/>
-			<h2 className="productsHeading">Products</h2>
-			{loading ? (
-				<Loader />
-			) : (
-				<Container sx={{ width: "69%", minHeight: "30vh" }}>
-					<Grid
-						container
-						spacing={2}
-						justifyContent="center"
-						alignItems="center"
-					>
-						{products &&
-							products.map((product) => {
+
+			<section className="productsHero">
+				<p className="productsEyebrow">Collection</p>
+				<h2 className="productsHeading">Find Products You Will Love</h2>
+				<p>
+					{keyword
+						? `Showing results for "${keyword}"`
+						: "Browse our full catalog with dynamic filters and curated categories."}
+				</p>
+			</section>
+
+			<div className="productsLayout">
+				<aside className="filterBox">
+					<div className="filterBlock">
+						<p className="filterLabel">Price Range</p>
+						<div className="priceMeta">
+							<span>Rs. {price[0]}</span>
+							<span>Rs. {price[1]}</span>
+						</div>
+						<Slider
+							className="priceSlider"
+							getAriaLabel={() => "Price Range"}
+							value={price}
+							onChangeCommitted={handlePriceChange}
+							valueLabelDisplay="auto"
+							min={1}
+							max={2500}
+						/>
+					</div>
+
+					<div className="filterBlock">
+						<p className="filterLabel">Categories</p>
+						<div className="categoryBox">
+							<button
+								type="button"
+								className={`category-link ${categ === "" ? "active" : ""}`}
+								onClick={() => handleCategoryChange("")}
+							>
+								All Products
+							</button>
+							{categories.map((category) => {
 								return (
-									<Grid key={product._id} item xs={12} sm={6} md={4} lg={3}>
-										<ProductCard product={product} />
-									</Grid>
+									<button
+										type="button"
+										className={`category-link ${
+											categ === category ? "active" : ""
+										}`}
+										key={category}
+										onClick={() => handleCategoryChange(category)}
+									>
+										{category}
+									</button>
 								);
 							})}
-					</Grid>
-				</Container>
-			)}
-			<div className="filterBox">
-				<Box sx={{ marginBottom: "1vmax", marginTop: "0.3vmax" }}>
-					<Typography variant="h5" sx={{ marginBottom: "0.8vmax" }}>
-						Filters
-					</Typography>
-					<Typography variant="h7">Price</Typography>
-					<Slider
-						sx={{ marginLeft: "0.5vmax" }}
-						getAriaLabel={() => "Price Range"}
-						value={price}
-						onChangeCommitted={handlePriceChange}
-						valueLabelDisplay="auto"
-						min={1}
-						max={2500}
-						// getAriaValueText={valuetext}
-					/>
-				</Box>
-				<Box>
-					<Typography variant="h7">Categories</Typography>
-					<ul className="categoryBox">
-						{categories.map((category) => {
-							return (
-								<li
-									className="category-link"
-									key={category}
-									onClick={(e) => {
-										handleCategChange(e, category);
-									}}
-								>
-									{category}
-								</li>
-							);
-						})}
-					</ul>
-				</Box>
+						</div>
+					</div>
+
+					<button
+						type="button"
+						className="resetFiltersBtn"
+						onClick={handleResetFilters}
+					>
+						Reset Filters
+					</button>
+				</aside>
+
+				<section className="productsContent">
+					{loading ? (
+						<Loader />
+					) : products && products.length > 0 ? (
+						<Container disableGutters>
+							<Grid container spacing={{ xs: 2, sm: 2.5 }}>
+								{products.map((product) => {
+									return (
+										<Grid key={product._id} item xs={12} sm={6} md={6} lg={4}>
+											<ProductCard product={product} />
+										</Grid>
+									);
+								})}
+							</Grid>
+						</Container>
+					) : (
+						<div className="productsEmptyState">
+							<h3>No products found</h3>
+							<p>Try a different price range or reset your filters.</p>
+						</div>
+					)}
+				</section>
 			</div>
 
-			<div className="paginationBox">
-				<Stack spacing={2}>
+			{!loading && totalPages > 1 && (
+				<div className="paginationBox">
 					<Pagination
 						count={totalPages}
 						page={page}
 						onChange={handlePageChange}
+						color="primary"
+						shape="rounded"
 					/>
-				</Stack>
-			</div>
+				</div>
+			)}
 		</div>
 	);
 };
